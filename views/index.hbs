@@ -1,0 +1,93 @@
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">var userData = {{{strUser}}}.google.data; console.log("Data: " + userData[0]);</script>
+<script type="text/javascript" src="javascripts/chartHelper.js"></script>
+<script type="text/javascript" src="javascripts/chartDashboard.js"></script>
+
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+          <li><center><strong>General</strong></center></li>
+          <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+          {{#if user.google.spreadsheetId}}
+            <li><a href="https://docs.google.com/spreadsheets/d/{{user.google.spreadsheetId}}/edit#gid=0">Google Sheet</a></li>
+              <li><a href="/team">Team Statistics</a></li>
+          {{/if}}
+        </ul>
+        <ul class="nav nav-sidebar">
+          {{#if user.google.data}}
+            <li><center><strong>Lift Reports</strong></center></li>
+            {{#each (getColumns user.google.data) }}
+              <li><a href="/lift/{{encode this}}">{{this}}</a></li>
+            {{/each}}
+          {{/if}}
+        </ul>
+      </div>
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h1 class="page-header">Dashboard</h1>
+
+        <div class="row placeholders">
+          <div class="col-xs-6 col-sm-3 placeholder">
+            <div id="chart_div0" style="width: 900px; height: 300px" class="img-responsive"></div>
+            <h4 id="chart_div0_title">Lift 1</h4>
+            <span class="text-muted">Max</span>
+          </div>
+          <div class="col-xs-6 col-sm-3 placeholder">
+            <div id="chart_div1" style="width: 900px; height: 300px" class="img-responsive"></div>
+            <h4 id="chart_div1_title">Lift 2</h4>
+            <span class="text-muted">Max</span>
+          </div>
+          <div class="col-xs-6 col-sm-3 placeholder">
+            <div id="chart_div2" style="width: 900px; height: 300px" class="img-responsive"></div>
+            <h4 id="chart_div2_title">Lift 3</h4>
+            <span class="text-muted">Max</span>
+          </div>
+          <div class="col-xs-6 col-sm-3 placeholder">
+            <div id="chart_div3" style="width: 900px; height: 300px" class="img-responsive"></div>
+            <h4 id="chart_div3_title">Lift 4</h4>
+            <span class="text-muted">Max</span>
+          </div>
+        </div>
+
+        <h2 class="sub-header">Data</h2>
+        <div class="table-responsive">
+        <table class="table table-striped">
+          {{#if user.google.data }}
+            {{{ generateDashboardTable user.google.data}}}
+          {{else}}
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Squat</th>
+                <th>1RM</th>
+                <th>Deadlift</th>
+                <th>1RM</th>
+                <th>Bench Press</th>
+                <th>1RM</th>
+                <th>Overhead Press</th>
+                <th>1RM</th>
+                <th>Curls</th>
+                <th>1RM</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Today</td>
+                <td>Squat Numbers</td>
+                <td></td>
+                <td>Deadlift Numbers</td>
+                <td></td>
+                <td>Bench Press Numbers</td>
+                <td></td>
+                <td>Overhead Press Numbers</td>
+                <td></td>
+                <td>Curls Numbers</td>
+                <td></td>
+              </tr>
+            </tbody>
+          {{/if}}
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>

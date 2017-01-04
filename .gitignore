@@ -1,0 +1,22 @@
+# Maintain Travis File
+!.travis.yml
+
+# Maintain Git Files
+!.git*
+!.gitignore
+
+# Gradle Files and Folders
+.gradle
+/gradle
+gradlew
+gradlew.bat
+
+# Build Files and Folders
+/build
+/lib
+/node_modules
+npm-debug.log
+
+# Config Files
+/config/auth.js
+/config/database.js
