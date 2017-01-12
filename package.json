@@ -14,7 +14,6 @@
     "express-handlebars": "*",
     "express-session": "~1.0.0",
     "google-auth-library": "*",
-    "google-web-components": "*",
     "googleapis": "*",
     "handlebars": "^4.0.5",
     "hbs": "~4.0.1",
