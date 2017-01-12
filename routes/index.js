@@ -30,8 +30,7 @@ module.exports = function(app, passport) {
 
   /* GET Lift Page */
   app.get('/lift/:name', function(req, res, next) {
-    //   req.out = youtube.getFormVideo(req.user, req.params.name);
-      getYoutubeLinks(req, function(error, out) {
+      youtube.getFormVideo(req.user, req.params.name, function(error, out) {
           console.log("out: " + out);
         if (error) return next(error);
         return res.render('lift', {
