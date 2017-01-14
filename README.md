@@ -7,13 +7,14 @@ Monitor your workout and lifting progress through the Workout Report website. Co
     - [x] Top 5 Workouts Numbers
     - [x] Top 4 Lift Charts
     - [ ] Last X Number of Lifts
-- [ ] Single Lifts
+- [x] Single Lifts
     - [x] All Lift Numbers
     - [x] Lift Graph
-    - [ ] Youtube Links
+    - [x] YouTube Links
         - [x] Query: Lift Form
-        - [ ] Query: Lift Specific Workout
-        - [ ] In Parallel: Promise
+        - [x] Query: Lift Specific Workout
+        - [x] In Parallel: Promise
+        - [ ] Randomize Video Queries
 - [ ] Team Lifts
     - [ ] Select Lift
     - [ ] View all Teammates Graph

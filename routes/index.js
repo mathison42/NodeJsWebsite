@@ -30,16 +30,17 @@ module.exports = function(app, passport) {
 
   /* GET Lift Page */
   app.get('/lift/:name', function(req, res, next) {
-      youtube.getFormVideo(req.user, req.params.name, function(error, out) {
-          console.log("out: " + out);
-        if (error) return next(error);
-        return res.render('lift', {
-            user : req.user, // get the user out of session and pass to template
-            strUser: JSON.stringify(req.user),
-            lift:  req.params.name,
-            links: out,
-            helpers: require("../public/javascripts/lifts")
-        });
+    youtube.getVideos(req.user, req.params.name, function(error, videos) {
+      console.log("videos:", videos);
+      console.log("videos:", JSON.stringify(videos));
+      if (error) return next(error);
+      return res.render('lift', {
+        user : req.user, // get the user out of session and pass to template
+        strUser: JSON.stringify(req.user),
+        lift:  req.params.name,
+        videos: videos,
+        helpers: require("../public/javascripts/lifts")
+      });
     });
   });
 
