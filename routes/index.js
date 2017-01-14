@@ -31,8 +31,7 @@ module.exports = function(app, passport) {
   /* GET Lift Page */
   app.get('/lift/:name', function(req, res, next) {
     youtube.getVideos(req.user, req.params.name, function(error, videos) {
-      console.log("videos:", videos);
-      console.log("videos:", JSON.stringify(videos));
+      //console.log("videos:", videos);
       if (error) return next(error);
       return res.render('lift', {
         user : req.user, // get the user out of session and pass to template

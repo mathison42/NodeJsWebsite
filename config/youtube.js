@@ -8,13 +8,13 @@ module.exports =  {
   getVideos: function (user, lift, callback) {
 
     // Promise for Form Video
-    var promiseGetFormVideo = new Promise(function(resolve) {
-      getFormVideo(user, lift, resolve);
+    var promiseGetFormVideo = new Promise(function(resolve, reject) {
+      getFormVideo(user, lift, resolve, reject);
     });
 
     // Promise for Other Lift-type video
-    var promiseGetOtherVideo = new Promise(function(resolve) {
-      getOtherVideo(user, lift, resolve);
+    var promiseGetOtherVideo = new Promise(function(resolve, reject) {
+      getOtherVideo(user, lift, resolve, reject);
 
     });
 
@@ -22,11 +22,14 @@ module.exports =  {
     Promise.all([
         promiseGetFormVideo, promiseGetOtherVideo
     ]).then(function(value) {
-        // value contains an array ['cloudy', 'bob', 'meteor rising'] as resolved by the promises
-        // console.log('Rendering data');
-        // console.log("1)", JSON.stringify(value[0]));
-        // console.log("2)", JSON.stringify(value[1]));
-        callback(null, value);
+      // value contains an array ['cloudy', 'bob', 'meteor rising'] as resolved by the promises
+      // console.log('Rendering data');
+      // console.log("1)", JSON.stringify(value[0]));
+      // console.log("2)", JSON.stringify(value[1]));
+      callback(null, value);
+    }, function (err) {
+      console.log(err); //
+      callback(null, null);
     });
   }
 
@@ -35,7 +38,7 @@ module.exports =  {
 // Function to get form video
 // Random = 5
 // Query: $lift workout form
-var getFormVideo = function(user, lift, callback) {
+var getFormVideo = function(user, lift, callback, error) {
 
   var yt = google.youtube('v3');
   var request = yt.search.list({
@@ -44,8 +47,7 @@ var getFormVideo = function(user, lift, callback) {
     part: 'snippet'
   }, function(err, response) {
     if (err) {
-      console.log('The getFormVideo API returned an error: ' + err);
-      return;
+      error('The getFormVideo API returned an error: ' + err);
     }
 
     var result = response.items[randomNumber(5)];
@@ -58,7 +60,7 @@ var getFormVideo = function(user, lift, callback) {
 // Function to get other lift-type video
 // Random = 5
 // Query: other $lift exercises
-var getOtherVideo = function(user, lift, callback) {
+var getOtherVideo = function(user, lift, callback, error) {
   var yt = google.youtube('v3');
   var request = yt.search.list({
     auth: initGoogleAuth(user),
@@ -66,8 +68,7 @@ var getOtherVideo = function(user, lift, callback) {
     part: 'snippet'
   }, function(err, response) {
     if (err) {
-      console.log('The getOtherVideo API returned an error: ' + err);
-      return;
+      error('The getOtherVideo API returned an error: ' + err);
     }
 
     var result = response.items[randomNumber(5)];
