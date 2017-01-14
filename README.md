@@ -11,9 +11,9 @@ Monitor your workout and lifting progress through the Workout Report website. Co
     - [x] All Lift Numbers
     - [x] Lift Graph
     - [ ] Youtube Links
-        - [ ] Query: Lift Form
+        - [x] Query: Lift Form
         - [ ] Query: Lift Specific Workout
-        - [ ] Query: Sport Related Workout
+        - [ ] In Parallel: Promise
 - [ ] Team Lifts
     - [ ] Select Lift
     - [ ] View all Teammates Graph
@@ -36,4 +36,4 @@ Monitor your workout and lifting progress through the Workout Report website. Co
 	    `npm install`
 	5) Start MongoDB in it's bin dir: `./mongod` and `./mongo`
 	6) Run in the project's root directory:
-	    `set DEBUG=NodeJsWebsite:* & npm start`
+	    `set DEBUG=NodeJsWebsite:* & npm start` or './start_server.sh'
