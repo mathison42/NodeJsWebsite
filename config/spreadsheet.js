@@ -2,14 +2,13 @@
 var User       = require('../models/user');
 
 var configAuth = require('./auth');
-var google = require('googleapis');
+var google     = require('googleapis');
 var googleAuth = require('google-auth-library');
 
 module.exports =  {
-    getData: function(user) {
+    getData: function(user, cbRenderDashboard) {
         var data = []
-        console.log("getData Token: " + user.google.token)
-        console.log("getData spreadsheetId: " + user.google.spreadsheetId)
+
         // Generate OAuth
         var auth = new googleAuth();
         var oauth2Client = new auth.OAuth2(configAuth.googleAuth.clientID, configAuth.googleAuth.clientSecret, configAuth.googleAuth.callbackURL);
@@ -21,54 +20,43 @@ module.exports =  {
             range: 'A:ZZZ',
           }, function(err, response) {
             if (err) {
-              console.log('The API returned an error: ' + err);
+              console.log('getData: The SpreadSheet API returned an error: ' + err);
               return;
             }
             var rows = response.values;
 
             // set all of the relevant information
             user.google.data = rows
-            //console.log(rows)
 
             // save the user
             user.save(function(err) {
                 if (err)
                     throw err;
             });
-            console.log("7 spreadsheetId: " + user.google.spreadsheetId)
-            return user;
+            cbRenderDashboard(user);
         });
     },
 
-     saveSpreadsheetID: function(user, spreadsheetId, callback) {
-         console.log("SS SpreadsheetId: " + spreadsheetId)
-         console.log("SS user.google.id: " + user.google.id)
+     saveSpreadsheetID: function(user, spreadsheetId, cbGetData, cbRenderDashboard) {
          // try to find the user based on their google id
 
-          console.log("1")
           User.findOne({ 'google.id' : user.google.id }, function(err, user) {
-                  console.log("4:" + user.google.spreadsheetId)
               if (err)
                   return done(err);
 
               if (user) {
                   // set all of the relevant information
-                  console.log("SS before: " + spreadsheetId)
                   user.google.spreadsheetId = spreadsheetId
-                  console.log("SSafter: " + user.google.spreadsheetId)
 
                   // save the user
                   user.save(function(err) {
                       if (err)
                           throw err;
                   });
-              console.log("SS Returning: " + user.google.spreadsheetId)
-              console.log("5:" + user.google.spreadsheetId)
-              console.log("5:" + user.google.token)
-              return callback(user);
+              return cbGetData(user, cbRenderDashboard);
               } else {
                   // if a user is not found, redirect to the login screen
-                  console.log("SS FAIL MESSAGE");
+                  console.log("Not logged in. Redirecting to login screen...");
               }
           });
     },
@@ -81,11 +69,9 @@ module.exports =  {
             if (rows.length == 0) {
               console.log('No data found.');
             } else {
-              console.log('Columns:');
               for (var i = 0; i < rows.length; i++) {
                 var row = rows[i];
                 for (var j = 0; j < row.length; j++) {
-                //    console.log('%s', row[j]);
                     result.push(row[j]);
                 }
               }

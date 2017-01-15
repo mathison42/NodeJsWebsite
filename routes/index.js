@@ -13,19 +13,21 @@ module.exports = function(app, passport) {
 
   /* POST home page */
   app.post('/', isLoggedIn, function(req, res) {
-      var user = req.user
+    // console.log("NewData: " + user.google.data);
+    var renderDashboard = function(user) {
+      res.render('index', {
+        user : user, // get the user out of session and pass to template
+        strUser: JSON.stringify(user)
+      });
+    };
+
     if (req.body.spreadsheetId){
-      spreadsheet.saveSpreadsheetID(user, req.body.spreadsheetId, spreadsheet.getData)
-      console.log("Index - spreadsheetId: " + user.google.spreadsheetId)
+      spreadsheet.saveSpreadsheetID(req.user, req.body.spreadsheetId,
+          spreadsheet.getData, renderDashboard)
     }
     else {
-      spreadsheet.getData(user)
+      spreadsheet.getData(req.user, renderDashboard)
     }
-    // console.log("NewData: " + user.google.data);
-    res.render('index', {
-      user : user, // get the user out of session and pass to template
-      strUser: JSON.stringify(user)
-    });
   });
 
   /* GET Lift Page */
@@ -87,9 +89,3 @@ function isLoggedIn(req, res, next) {
     // if they aren't redirect them to the home page
     res.redirect('/auth/google');
 }
-
-
-
-function getYoutubeLinks(req, callback) {
-  return callback(null, youtube.getFormVideo(req.user, req.params.name));
-};
