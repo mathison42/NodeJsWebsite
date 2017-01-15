@@ -13,7 +13,6 @@ module.exports = function(app, passport) {
 
   /* POST home page */
   app.post('/', isLoggedIn, function(req, res) {
-    // console.log("NewData: " + user.google.data);
     var renderDashboard = function(user) {
       res.render('index', {
         user : user, // get the user out of session and pass to template
@@ -28,6 +27,14 @@ module.exports = function(app, passport) {
     else {
       spreadsheet.getData(req.user, renderDashboard)
     }
+  });
+
+  /* GET Team page */
+  app.get('/team', isLoggedIn, function(req, res) {
+    res.render('team', {
+      user : req.user,
+      strUser: JSON.stringify(req.user)
+    });
   });
 
   /* GET Lift Page */

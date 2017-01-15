@@ -25,17 +25,17 @@
         </ul>
       </div>
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <h1 class="page-header">Dashboard</h1>
+        <h1 class="page-header">{{lift}} Report</h1>
 
         <div class="row placeholders">
           <div class="placeholder">
-            <div id="chart_div_lift" style="" class="img-responsive"></div>
+            <div id="chart_div_lift" style="height: 300px" class="img-responsive"></div>
             <h4 id="chart_div_lift_title">{{lift}}</h4>
             <span class="text-muted">Max</span>
           </div>
         </div>
 
-        <h2 class="sub-header">{{lift}} Data</h2>
+        <h2 class="sub-header">Data</h2>
         <div class="table-responsive">
         <table class="table table-striped">
           {{#if user.google.data }}

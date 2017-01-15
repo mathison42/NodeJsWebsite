@@ -1,0 +1,46 @@
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">var userData = {{{strUser}}}.google.data;</script>
+<script type="text/javascript" src="../javascripts/chartHelper.js"></script>
+<script type="text/javascript" src="../javascripts/chartTeam.js"></script>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-sidebar">
+        <li><center><strong>General</strong></center></li>
+        <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+        {{#if user.google.spreadsheetId}}
+          <li><a href="https://docs.google.com/spreadsheets/d/{{user.google.spreadsheetId}}/edit#gid=0">Google Sheet</a></li>
+            <li><a href="/team">Team Statistics</a></li>
+        {{/if}}
+      </ul>
+      <ul class="nav nav-sidebar">
+        {{#if user.google.data}}
+          <li><center><strong>Lift Reports</strong></center></li>
+          {{#each (getColumns user.google.data) }}
+            <li><a href="/lift/{{encode this}}">{{this}}</a></li>
+          {{/each}}
+        {{/if}}
+      </ul>
+    </div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      <h1 class="page-header">Team Report</h1>
+      <div>
+        <label>Lift:</label>
+        <select name="liftList" onchange="if (this.selectedIndex) generateTeamGraph(this.value);">
+          <option value="-1">--</option>
+          {{#each (getColumns user.google.data) }}
+            <option value="{{this}}">{{this}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="row placeholders">
+        <div class="placeholder">
+          <div id="chart_div_team" style="height: 400px" class="img-responsive"></div>
+          <h4 id="chart_div_team_title">{{lift}}</h4>
+          <span class="text-muted">Team Maxes</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
