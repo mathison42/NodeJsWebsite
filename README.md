@@ -16,11 +16,12 @@ Monitor your workout and lifting progress through the Workout Report website. Co
         - [x] In Parallel: Promise
         - [ ] Randomize Video Queries
 - [ ] Team Lifts
-    - [ ] Select Lift
+    - [x] Select Lift
     - [ ] View all Teammates Graph
     - [ ] Chart of individual numbers
 - [ ] Profile
     - [ ] Specify Sport
+    - [ ] Specify Role
     - [ ] Specify Team Name
     - [ ] Directions
 
