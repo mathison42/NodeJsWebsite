@@ -17,7 +17,7 @@ Monitor your workout and lifting progress through the Workout Report website. Co
         - [ ] Randomize Video Queries
 - [ ] Team Lifts
     - [x] Select Lift
-    - [ ] View all Teammates Graph
+    - [x] View all Teammates Graph
     - [ ] Chart of individual numbers
 - [ ] Profile
     - [ ] Specify Sport
