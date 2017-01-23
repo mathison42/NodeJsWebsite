@@ -1,6 +1,7 @@
 
 var spreadsheet = require("../config/spreadsheet.js")
-var youtube = require("../config/youtube.js")
+var youtube     = require("../config/youtube.js")
+var mongodb     = require("../config/mongodb.js")
 module.exports = function(app, passport) {
 
   /* GET home page */
@@ -13,8 +14,9 @@ module.exports = function(app, passport) {
 
   /* POST home page */
   app.post('/', isLoggedIn, function(req, res) {
-    var renderDashboard = function(user) {
+    var renderDashboard = function(err, user) {
       res.render('index', {
+        error : err, // error
         user : user, // get the user out of session and pass to template
         strUser: JSON.stringify(user)
       });
@@ -31,10 +33,18 @@ module.exports = function(app, passport) {
 
   /* GET Team page */
   app.get('/team', isLoggedIn, function(req, res) {
-    res.render('team', {
-      user : req.user,
-      strUser: JSON.stringify(req.user)
-    });
+     mongodb.getAllData(req.user, function(error, teamData) {
+       if (error) {
+         console.log(error);
+         return;
+       }
+       // Note: Double sending user data
+       return res.render('team', {
+         user : req.user,
+         strUser: JSON.stringify(req.user),
+         teamData : JSON.stringify(teamData)
+       });
+     });
   });
 
   /* GET Lift Page */

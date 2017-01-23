@@ -1,4 +1,5 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type ="text/javascript">if ("{{error}}") alert("{{error}}");</script>
 <script type="text/javascript">var userData = {{{strUser}}}.google.data; console.log("Data: " + userData[0]);</script>
 <script type="text/javascript" src="javascripts/chartHelper.js"></script>
 <script type="text/javascript" src="javascripts/chartDashboard.js"></script>
@@ -15,11 +16,15 @@
           {{/if}}
         </ul>
         <ul class="nav nav-sidebar">
-          {{#if user.google.data}}
+          {{#if user.google.spreadsheetId}}
             <li><center><strong>Lift Reports</strong></center></li>
+          {{/if}}
+          {{#if user.google.data}}
             {{#each (getColumns user.google.data) }}
               <li><a href="/lift/{{encode this}}">{{this}}</a></li>
             {{/each}}
+          {{else if user.google.spreadsheetId}}
+            <li><a>None</a></li>
           {{/if}}
         </ul>
       </div>

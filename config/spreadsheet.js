@@ -21,6 +21,7 @@ module.exports =  {
           }, function(err, response) {
             if (err) {
               console.log('getData: The SpreadSheet API returned an error: ' + err);
+              cbRenderDashboard("[Error] Spreadsheet is invalid. View profile for directions.", user);
               return;
             }
             var rows = response.values;
@@ -33,53 +34,53 @@ module.exports =  {
                 if (err)
                     throw err;
             });
-            cbRenderDashboard(user);
+            cbRenderDashboard(null, user);
         });
     },
 
-     saveSpreadsheetID: function(user, spreadsheetId, cbGetData, cbRenderDashboard) {
-         // try to find the user based on their google id
+   saveSpreadsheetID: function(user, spreadsheetId, cbGetData, cbRenderDashboard) {
+     // try to find the user based on their google id
 
-          User.findOne({ 'google.id' : user.google.id }, function(err, user) {
-              if (err)
-                  return done(err);
+     User.findOne({ 'google.id' : user.google.id }, function(err, user) {
+       if (err)
+          return done(err);
 
-              if (user) {
-                  // set all of the relevant information
-                  user.google.spreadsheetId = spreadsheetId
+       if (user) {
+          // set all of the relevant information
+          user.google.spreadsheetId = spreadsheetId
 
-                  // save the user
-                  user.save(function(err) {
-                      if (err)
-                          throw err;
-                  });
-              return cbGetData(user, cbRenderDashboard);
-              } else {
-                  // if a user is not found, redirect to the login screen
-                  console.log("Not logged in. Redirecting to login screen...");
-              }
+          // save the user
+          user.save(function(err) {
+            if (err)
+              throw err;
           });
-    },
+          return cbGetData(user, cbRenderDashboard);
+      } else {
+          // if a user is not found, redirect to the login screen
+          console.log("Not logged in. Redirecting to login screen...");
+      }
+    });
+  },
 
-    getColumns: function(user) {
-        var result = [];
-        if (user.google.data) {
-            // Get all Columns
-            var data = user.google.data
-            if (rows.length == 0) {
-              console.log('No data found.');
-            } else {
-              for (var i = 0; i < rows.length; i++) {
-                var row = rows[i];
-                for (var j = 0; j < row.length; j++) {
-                    result.push(row[j]);
-                }
+  getColumns: function(user) {
+      var result = [];
+      if (user.google.data) {
+          // Get all Columns
+          var data = user.google.data
+          if (rows.length == 0) {
+            console.log('No data found.');
+          } else {
+            for (var i = 0; i < rows.length; i++) {
+              var row = rows[i];
+              for (var j = 0; j < row.length; j++) {
+                  result.push(row[j]);
               }
             }
-        }
-        else {
-            alert("Please login, specify the spreadsheet, and import data!")
-        }
-        return result;
-    }
+          }
+      }
+      else {
+          alert("Please login, specify the spreadsheet, and import data!")
+      }
+      return result;
+  }
 };

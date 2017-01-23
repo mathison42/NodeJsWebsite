@@ -142,4 +142,22 @@ function drawBasicGraph(data, liftId, graphId) {
     chart.draw(dt, options);
     var title = document.getElementById(graphId + "_title");
     title.textContent = data[0][liftId];
+};
+
+function drawTeamGraph(dt, lift, graphId) {
+
+    var options = {
+        // hAxis: {
+        //   title: 'Date'
+        // },
+        vAxis: {
+            title: 'Weight (lbs)'
+        },
+        legend: {}
+    };
+
+    var chart = new google.visualization.LineChart(document.getElementById(graphId));
+    chart.draw(dt, options);
+    var title = document.getElementById(graphId + "_title");
+    title.textContent = lift;
 }

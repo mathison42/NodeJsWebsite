@@ -124,11 +124,12 @@
     };
 
     exports.getOneRepMax = function (input) {
-      if (!input) {
+      if (input == "" || input == undefined || input == null) {
         return "";
       }
 
       var result = "";
+      // Needs to properly parse a single number too!
       var magic = "^(\\d+x\\d+(\\*\\d+)?)((-\\d+x\\d+(\\*\\d+)?)*)$";
       var subMagic = "\\d+x\\d+"
       var inputArray = input.match(magic);
@@ -154,11 +155,11 @@
           // Assume weight is [1] and reps is [0]
           if (fullArray[0] <= 30 && fullArray[1] > 30) {
             weight = fullArray[1];
-            reps    = fullArray[0];
+            reps   = fullArray[0];
           // No idea or values are reversed.. weight is [0] and reps is [1]
           } else {
             weight = fullArray[0];
-            reps    = fullArray[1];
+            reps   = fullArray[1];
           }
         } else {
           console.log("[Error] Last Rep Array length != 2.");
