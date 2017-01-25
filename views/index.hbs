@@ -1,5 +1,5 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type ="text/javascript">if ("{{error}}") alert("{{error}}");</script>
+<script type="text/javascript">if ("{{error}}") alert("{{error}}");</script>
 <script type="text/javascript">var userData = {{{strUser}}}.google.data; console.log("Data: " + userData[0]);</script>
 <script type="text/javascript" src="javascripts/chartHelper.js"></script>
 <script type="text/javascript" src="javascripts/chartDashboard.js"></script>
@@ -58,7 +58,7 @@
         <div class="table-responsive">
         <table class="table table-striped">
           {{#if user.google.data }}
-            {{{ generateDashboardTable user.google.data}}}
+            {{{ generateDashboardTable user.google.data 28}}}
           {{else}}
             <thead>
               <tr>

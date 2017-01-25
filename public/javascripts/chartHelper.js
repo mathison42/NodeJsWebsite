@@ -23,10 +23,16 @@ function countTotalLifts(data) {
 }
 
 function getMaxLifts(columns, count) {
-    // Determine Highest 5 Lifts
+
+    // Determine Highest "5" Lifts
+    var topLiftsCount = 5;
+    if (columns.length < 5) {
+      topLiftsCount = columns.length
+    }
+
     var maxColumns   = [];
     var maxColumnIds = [];
-    for (var i = 0; i < 5; i++){
+    for (var i = 0; i < topLiftsCount; i++){
       var max   = -1;
       var maxId = -1;
       for (var j = 1; j < count.length; j++) {
@@ -115,13 +121,19 @@ function validWeight(input) {
   return result;
 };
 
-function drawBasicGraph(data, liftId, graphId) {
+function drawBasicGraph(data, liftId, graphId, lastXRecords) {
 
     var dt = new google.visualization.DataTable();
     dt.addColumn('date', 'X');
     dt.addColumn('number', '1RM');
 
-    for (var i = 1; i < data.length; i++) {
+
+    // Calculate how many days to show
+    var limit = data.length - 1 - lastXRecords;
+    if (limit < 1) {
+      limit = 1;
+    }
+    for (var i=data.length-1; i>limit; i--) {
         // console.log(data[i][liftId]);
         if (validWeight(data[i][liftId])) {
             dt.addRow([new Date(data[i][0]), getOneRepMax(data[i][liftId])]);
