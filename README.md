@@ -21,11 +21,12 @@ Monitor your workout and lifting progress through the Workout Report website. Co
     - [ ] Chart of individual numbers
 - [ ] Profile
     - [ ] Specify Number of Dashboard Records
-    - [ ] Specify Sport
-    - [ ] Specify Team Name
-    - [ ] Directions
+    - [x] Specify Sport
+    - [x] Specify Team Name
+    - [ ] Directions and Template
 - [ ] Finalize
     - [ ] Prevent basic input errors
+    - [ ] Remove all data points that don't have a date or have future date
     - [ ] Only accept known emails
     - [ ] Google hosting
 

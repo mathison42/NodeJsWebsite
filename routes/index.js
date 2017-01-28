@@ -35,7 +35,7 @@ module.exports = function(app, passport) {
 
   /* GET Team page */
   app.get('/team', isLoggedIn, function(req, res) {
-     mongodb.getAllData(req.user, function(error, teamData) {
+     mongodb.getAllTeamData(req.user, function(error, teamData) {
        if (error) {
          console.log(error);
          return;

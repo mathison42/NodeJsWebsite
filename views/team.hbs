@@ -12,7 +12,7 @@
         <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
         {{#if user.google.spreadsheetId}}
           <li><a href="https://docs.google.com/spreadsheets/d/{{user.google.spreadsheetId}}/edit#gid=0">Google Sheet</a></li>
-            <li><a href="/team">Team Statistics</a></li>
+            <li><a href="/team">Team Report</a></li>
         {{/if}}
       </ul>
       <ul class="nav nav-sidebar">
@@ -25,7 +25,7 @@
       </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-      <h1 class="page-header">Team Report</h1>
+      <h1 class="page-header">{{user.profile.team}} Report</h1>
       <div>
         <label>Lift:</label>
         <select name="liftList" onchange="if (this.selectedIndex) generateTeamGraph(this.value);">
