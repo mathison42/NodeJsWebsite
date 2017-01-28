@@ -1,21 +1,59 @@
 <div class="col-sm-12">
     <div class="well">
-        <h3 class="text-danger"><span class="fa fa-google-plus"></span> Google Data</h3>
-
+        <h3 class="text-danger"><span class="fa fa-google-plus"></span> User Data</h3>
             <p>
                 <strong>ID</strong>: {{ user.google.id }}<br>
-                <strong>Token</strong>: {{ user.google.token }}<br>
                 <strong>Name</strong>: {{ user.google.name }}<br>
                 <strong>Email</strong>: {{ user.google.email }}<br>
                 <strong>SpreadsheetId</strong>: {{ user.google.spreadsheetId }}<br><br><br><br>
-                <strong>RAW</strong>: {{ user.google.raw }}
+                <!-- <strong>Token</strong>: {{ user.google.token }}<br> -->
+                <!-- <strong>RAW</strong>: {{ user.google.raw }} -->
             </p>
     </div>
 </div>
-<!-- <div class="container">
-    <h1><span class="fa fa-sign-in"></span> Specify Google Spreadsheet</h1>
-    <form action="/" method="get">
-        <label>SpreadSheet ID: </label> <input type="text" class="form" name="spreadsheetId" size="50"><br>
-        <button type="submit" class="btn btn-warning btn-lg">Upload Data</button>
-    </form>
-</div> -->
+{{#if user.google.id}}
+  <div class="col-sm-12">
+      <div class="well">
+        <h3 class="text-danger"><span class="fa fa-google-plus"></span> Extra Profile Data</h3>
+        <form action="/profile" method="post">
+            <label>Activity: </label>
+            <select name="activity" id="activity" selected="{{user.profile.activity}}">
+              <option value="">None</option>
+              {{#each (listActivities) }}
+                {{#if (ifCond this '==' ../user.profile.activity) }}
+                  <option value="{{this}}" selected="selected">{{this}}</option>
+                {{else}}
+                  <option value="{{this}}">{{this}}</option>
+                {{/if}}
+              {{/each}}
+            </select>
+            <br>
+            <label>Team: </label>
+            <select name="team" id="team">
+              <option value="">None</option>
+              {{#each (listTeams) }}
+                {{#if (ifCond this '==' ../user.profile.team) }}
+                  <option value="{{this}}" selected="selected">{{this}}</option>
+                {{else}}
+                  <option value="{{this}}">{{this}}</option>
+                {{/if}}
+              {{/each}}
+            </select>
+            <br>
+            <label>Max Dashboard Days: </label>
+            <select name="maxDashDays" id="maxDashDays" selected="{{user.profile.maxDashDays}}">
+              <option value="0">All</option>
+              {{#each (listMaxDashDays 30) }}
+                {{#if (ifCond this '==' ../user.profile.maxDashDays) }}
+                  <option value="{{this}}" selected="selected">{{this}}</option>
+                {{else}}
+                  <option value="{{this}}">{{this}}</option>
+                {{/if}}
+              {{/each}}
+            </select>
+            <br>
+            <button type="submit" class="btn btn-warning btn-lg">Save Profile</button>
+        </form>
+    </div>
+  </div>
+{{/if}}

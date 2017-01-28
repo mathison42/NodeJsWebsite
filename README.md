@@ -20,10 +20,14 @@ Monitor your workout and lifting progress through the Workout Report website. Co
     - [x] View all Teammates Graph
     - [ ] Chart of individual numbers
 - [ ] Profile
+    - [ ] Specify Number of Dashboard Records
     - [ ] Specify Sport
-    - [ ] Specify Role
     - [ ] Specify Team Name
     - [ ] Directions
+- [ ] Finalize
+    - [ ] Prevent basic input errors
+    - [ ] Only accept known emails
+    - [ ] Google hosting
 
 ### Run Locally
 	1) Install MongoDB -> https://www.mongodb.com/

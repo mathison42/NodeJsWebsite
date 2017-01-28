@@ -12,6 +12,11 @@ var userSchema = mongoose.Schema({
         raw           : String,
         spreadsheetId : String,
         data          : Array
+    },
+    profile           : {
+      activity        : String,
+      team            : String,
+      maxDashDays     : Number
     }
 
 });

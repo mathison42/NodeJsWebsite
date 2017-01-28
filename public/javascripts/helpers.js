@@ -232,3 +232,59 @@ exports.testing = function () {
 exports.foo = function () { return 'FOO!'; };
 
 exports.bar = function () { return 'BAR!'; };
+
+exports.ifCond = function (v1, operator, v2) {
+    switch (operator) {
+        case '==':
+            return (v1 == v2) ? true : false;
+        case '===':
+            return (v1 === v2) ? true : false;
+        case '!=':
+            return (v1 != v2) ? true : false;
+        case '!==':
+            return (v1 !== v2) ? true : false;
+        case '<':
+            return (v1 < v2) ? true : false;
+        case '<=':
+            return (v1 <= v2) ? true : false;
+        case '>':
+            return (v1 > v2) ? true : false;
+        case '>=':
+            return (v1 >= v2) ? true : false;
+        case '&&':
+            return (v1 && v2) ? true : false;
+        case '||':
+            return (v1 || v2) ? true : false;
+        default:
+            return false;
+    }
+};
+
+/**
+ * param maxDay Max number for list
+ * return List from 1 to maxDay
+ */
+exports.listMaxDashDays = function (maxDay) {
+  var result = [];
+  for (var i = 1; i < maxDay+1; i++) {
+    result.push(i);
+  }
+  return result;
+};
+
+/**
+ * return List of supported activities
+ */
+exports.listActivities = function () {
+  // Will eventually retrieve list of sports from database
+  return ["Basketball", "Football", "Lacrosse", "Soccer",
+          "Ultimate Frisbee", "Weightlifting"];
+};
+
+/**
+ * return List of supported teams
+ */
+exports.listTeams = function () {
+  // Will eventually retrieve lift of teams from database
+  return ["Cleveland Smokestack", "CWRU Gobies"];
+};

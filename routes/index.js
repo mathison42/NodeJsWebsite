@@ -1,7 +1,9 @@
 
 var spreadsheet = require("../config/spreadsheet.js")
-var youtube     = require("../config/youtube.js")
 var mongodb     = require("../config/mongodb.js")
+var profile     = require("../config/profile.js")
+var youtube     = require("../config/youtube.js")
+
 module.exports = function(app, passport) {
 
   /* GET home page */
@@ -62,10 +64,23 @@ module.exports = function(app, passport) {
     });
   });
 
-  /* Profile */
+  /* GET Profile */
   app.get('/profile', function(req, res) {
     res.render('profile', {
       user : req.user // get the user out of session and pass to template
+    });
+  });
+
+  /* POST Profile */
+  app.post('/profile', isLoggedIn, function(req, res, next) {
+    //console.log("req.body", req.body);
+    // Variables are in req.body
+    // Save them to database, then reload profile with values set as defaults
+    profile.saveProfile(req.user, req.body, function(error, updatedUser) {
+      if (error) return next(error);
+      return res.render('profile', {
+        user : updatedUser // get the new user data
+      });
     });
   });
 
