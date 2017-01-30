@@ -18,5 +18,5 @@ function generateLiftGraph() {
 function drawLiftGraph(data) {
   var liftChart = "chart_div_lift";
   var columnId = userData[0].indexOf(lift);
-  drawBasicGraph(data, columnId, liftChart)
+  drawBasicGraph(data, columnId, liftChart, -1);
 }

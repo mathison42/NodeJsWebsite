@@ -125,7 +125,7 @@ exports.validValue = function (input) {
 
 /*
  * param input Confirms lift string data is valid and fits regex formatting
- * return true or false based on weight value [ex. 100x5*3-110x5]
+ * return true or false based on weight value [ex. 100x5*3-110x5 || 100]
  */
 exports.validWeight = function (input) {
   var result = false;
@@ -133,7 +133,11 @@ exports.validWeight = function (input) {
 
   if (input.match(magic)) {
     result = true;
-  }
+    // Confirms single values are still valid (within reason)
+    // Eventually want to tackle this by lift...
+  } else if (input && !isNaN(input) && input >= 0 && input < 500) {
+      result = true;
+    }
   return result;
 };
 
@@ -147,7 +151,12 @@ exports.validDate = function (input) {
   var magicDate2 ="^(0?[1-9]|1[012])[\/|.|-](0?[1-9]|[12][0-9]|3[01])[\/|.|-]((19|20)\\d\\d)$";
 
   if (input.match(magicDate1) || input.match(magicDate2)) {
-    result = true;
+    // Date is not greater than today's date
+    var today = new Date();
+    var inputDate = new Date(input);
+    if (today.getTime() >= inputDate.getTime()) {
+      result = true;
+    }
   }
   return result;
 };
@@ -162,9 +171,11 @@ exports.getOneRepMax = function (input) {
   }
 
   var result = "";
+  var weight = 0;
+  var reps   = 0;
   // Needs to properly parse a single number too!
-  var magic = "^(\\d+x\\d+(\\*\\d+)?)((-\\d+x\\d+(\\*\\d+)?)*)$";
-  var subMagic = "\\d+x\\d+"
+  var magic = "^(\\d+x\\d+(\\*\\d+)?)((-\\d+x\\d+(\\*\\d+)?)*)$"; // ex. 100x5*3
+  var subMagic = "\\d+x\\d+" // ex. 100x5
   var inputArray = input.match(magic);
 
   if (inputArray) {
@@ -181,8 +192,6 @@ exports.getOneRepMax = function (input) {
     }
 
     // Try and determine which value is weight and reps
-    var reps;
-    var weight;
     var fullArray = full[0].split("x");
     if (fullArray.length === 2) {
       // Assume weight is [1] and reps is [0]
@@ -198,9 +207,13 @@ exports.getOneRepMax = function (input) {
       console.log("[Error] Last Rep Array length != 2.");
       console.log("[Result]fullArray" + fullArray);
     }
-    // Calculate one rep max
-    result = exports.calculateOneRepMax(weight, reps);
+  } else if (!isNaN(input)) {
+    weight = input;
+    reps   = 1;
   }
+
+  // Calculate one rep max
+  result = exports.calculateOneRepMax(weight, reps);
   return result;
 };
 
@@ -212,8 +225,10 @@ exports.getOneRepMax = function (input) {
  */
 exports.calculateOneRepMax = function (w, r) {
   var result;
-  var raw1RM = w * (1 + r/30);
-  result = Math.floor(raw1RM);
+  if (!isNaN(w) && w >= 0 && !isNaN(r) && r > 0) {
+      var raw1RM = w * (1 + r/30);
+      result = Math.floor(raw1RM);
+  }
   return result;
 };
 
