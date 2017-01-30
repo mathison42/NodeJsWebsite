@@ -8,7 +8,7 @@ module.exports = function(app, passport) {
 
   /* GET home page */
   app.get('/', function(req, res) {
-    res.render('index', {
+    res.render('dashboard', {
       user : req.user, // get the user out of session and pass to template
       strUser: JSON.stringify(req.user)
     });
@@ -17,7 +17,7 @@ module.exports = function(app, passport) {
   /* POST home page */
   app.post('/', isLoggedIn, function(req, res) {
     var renderDashboard = function(err, user) {
-      res.render('index', {
+      res.render('dashboard', {
         error : err, // error
         user : user, // get the user out of session and pass to template
         strUser: JSON.stringify(user)

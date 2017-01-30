@@ -9,7 +9,7 @@
       <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
           <li><center><strong>General</strong></center></li>
-          <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+          <li><a href="/">Overview <span class="sr-only">(current)</span></a></li>
           {{#if user.google.spreadsheetId}}
             <li><a href="https://docs.google.com/spreadsheets/d/{{user.google.spreadsheetId}}/edit#gid=0">Google Sheet</a></li>
               <li><a href="/team">Team Statistics</a></li>
@@ -19,7 +19,11 @@
           {{#if user.google.data}}
             <li><center><strong>Lift Reports</strong></center></li>
             {{#each (getColumns user.google.data) }}
-              <li><a href="/lift/{{encode this}}">{{this}}</a></li>
+              {{#if (ifCond this '==' ../lift) }}
+                <li class="active"><a href="/lift/{{encode this}}">{{this}}</a></li>
+              {{else}}
+                <li><a href="/lift/{{encode this}}">{{this}}</a></li>
+              {{/if}}
             {{/each}}
           {{/if}}
         </ul>
