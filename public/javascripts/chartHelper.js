@@ -158,14 +158,12 @@ function drawBasicGraph(data, liftId, graphId, lastXRecords) {
 
     // Calculate how many days to show
     var limit;
-    if (lastXRecords < 0) {
-        limit = 1;
+    if (!lastXRecords || lastXRecords <= 0 || lastXRecords >= data.length) {
+        limit = 0;
     } else {
         limit = data.length - 1 - lastXRecords;
-        if (limit < 1) {
-            limit = 1;
-        }
     }
+
     for (var i=data.length-1; i>limit; i--) {
          //console.log(data[i][liftId]);
         if (validWeight(data[i][liftId])) {

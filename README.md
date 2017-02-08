@@ -20,14 +20,14 @@ Monitor your workout and lifting progress through the Workout Report website. Co
     - [x] View all Teammates Graph
     - [ ] Chart of individual numbers
 - [ ] Profile
-    - [ ] Specify Number of Dashboard Records
+    - [x] Specify Number of Dashboard Records
     - [x] Specify Sport
     - [x] Specify Team Name
     - [ ] Directions and Template
 - [ ] Finalize
     - [x] Prevent weight input errors
     - [x] Prevent date input errors
-    - [ ] Remove all data points that don't have a date or have future date
+    - [x] Remove all data points that don't have a date or have future date
     - [ ] Only accept known emails
     - [ ] Google hosting
 

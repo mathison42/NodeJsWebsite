@@ -84,10 +84,13 @@ exports.generateDashboardTable = function(data, lastXRecords) {
     resultHTML += "</tr></thead><tbody>";
 
     // Calculate how many days to show
-    var limit = data.length - 1 - lastXRecords;
-    if (limit < 0) {
-      limit = 0;
+    var limit;
+    if (!lastXRecords || lastXRecords <= 0 || lastXRecords >= data.length) {
+        limit = 0;
+    } else {
+        limit = data.length - 1 - lastXRecords;
     }
+
     // Get Reps and Sets for those lifts
     for (var i=data.length-1; i>limit; i--) {
       resultHTML += "<tr>";

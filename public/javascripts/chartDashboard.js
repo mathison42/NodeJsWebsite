@@ -36,6 +36,6 @@ function drawGraphs(data) {
   }
 
   for (var i = 0; i < graphCount; i++) {
-      drawBasicGraph(data, maxColumnIds[i], dashCharts[i], 28);
+      drawBasicGraph(data, maxColumnIds[i], dashCharts[i], maxDashDays);
   }
 }
