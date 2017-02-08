@@ -79,7 +79,8 @@ module.exports = function(app, passport) {
     profile.saveProfile(req.user, req.body, function(error, updatedUser) {
       if (error) return next(error);
       return res.render('profile', {
-        user : updatedUser // get the new user data
+        user : updatedUser, // get the new user data
+        updatedBool : true
       });
     });
   });
