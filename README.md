@@ -6,7 +6,7 @@ Monitor your workout and lifting progress through the Workout Report website. Co
 - [x] Dashboard
     - [x] Top 5 Workouts Numbers
     - [x] Top 4 Lift Charts
-    - [ ] Last X Number of Lifts
+    - [x] Last X Number of Lifts
 - [x] Single Lifts
     - [x] All Lift Numbers
     - [x] Lift Graph
@@ -23,7 +23,8 @@ Monitor your workout and lifting progress through the Workout Report website. Co
     - [x] Specify Number of Dashboard Records
     - [x] Specify Sport
     - [x] Specify Team Name
-    - [ ] Directions and Template
+    - [ ] Directions
+    - [x] Template
 - [ ] Finalize
     - [x] Prevent weight input errors
     - [x] Prevent date input errors

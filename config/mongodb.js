@@ -15,8 +15,9 @@ module.exports = {
       console.log("users: ", JSON.stringify(users));
       var team = {};
       if (users) {
+          // This will overwrite people with the same name. 
         for (var i = 0; i < users.length; i++) {
-          team[users[i].google.name] = users[i].google.data;
+            team[users[i].google.name] = users[i].google.data;
         }
       }
       if (team) {
