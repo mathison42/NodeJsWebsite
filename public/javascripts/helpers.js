@@ -304,5 +304,5 @@ exports.listActivities = function () {
  */
 exports.listTeams = function () {
   // Will eventually retrieve lift of teams from database
-  return ["Cleveland Smokestack", "CWRU Gobies"];
+  return ["Cleveland Smokestack", "CWRU Gobies", "Test"];
 };
