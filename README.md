@@ -30,7 +30,7 @@ Monitor your workout and lifting progress through the Workout Report website. Co
     - [x] Prevent date input errors
     - [x] Remove all data points that don't have a date or have future date
     - [ ] Only accept known emails
-    - [ ] Google hosting
+    - [x] Google hosting
 
 ### Run Locally
 	1) Install MongoDB -> https://www.mongodb.com/

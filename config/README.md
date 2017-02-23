@@ -10,7 +10,9 @@ module.exports = {
         'clientSecret'  : 'CLIENT_SECRET',
         'callbackURL'   : 'CALLBACK_URL'
     }
-
+    // Different from scotch tutorial
+    'memcache_url'  : 'MEMCACHE_URL', // Free 30 mb from redis.io
+    'secret'        : 'secret'
 };
 
 [MongoDB - database.js](https://scotch.io/tutorials/easy-node-authentication-setup-and-local)

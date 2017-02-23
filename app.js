@@ -11,10 +11,12 @@ var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
+var MemcachedStore = require('connect-memcached')(session);
 
 // configuration ===============================================================
 require('./config/passport')(passport); // pass passport for configuration
 var configDB = require('./config/database'); // get MongoDB database configuration
+var auth     = require('./config/auth'); // get general authentication configuration
 
 var app = express();
 
@@ -39,8 +41,24 @@ app.use(express.static(path.join(__dirname, 'public')));
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
 
+// Configure the session and session storage.
+const sessionConfig = {
+  resave: false,
+  saveUninitialized: false,
+  secret: auth.secret,
+  signed: true
+};
+
+// In production use the App Engine Memcache instance to store session data,
+// otherwise fallback to the default MemoryStore in development.
+if (!auth.googleAuth.callbackURL.includes("localhost")) {
+  sessionConfig.store = new MemcachedStore({
+    hosts: [auth.memcache_url]
+  });
+}
+
 // required for passport
-app.use(session({ secret: 'secret' })); // session secret
+app.use(session(sessionConfig)); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
