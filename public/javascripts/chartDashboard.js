@@ -1,7 +1,5 @@
 google.charts.load('current', {packages: ['corechart', 'line']});
 
-console.log("userData1: " + userData[0])
-
 if (userData) {
     google.charts.setOnLoadCallback(generateDashboardGraphs);
 }

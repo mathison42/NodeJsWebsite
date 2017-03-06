@@ -13,19 +13,27 @@
           <li class="active"><a href="/">Overview <span class="sr-only">(current)</span></a></li>
           {{#if user.google.spreadsheetId}}
             <li><a href="https://docs.google.com/spreadsheets/d/{{user.google.spreadsheetId}}/edit#gid=0">Google Sheet</a></li>
-              <li><a href="/team">Team Statistics</a></li>
+          {{else if user.google}}
+            <li><a><font color="#ff6666">No Spreadsheet Found</font></a></li>
+          {{/if}}
+          {{#if user.profile.team}}
+            <li><a href="/team">Team Statistics</a></li>
           {{/if}}
         </ul>
         <ul class="nav nav-sidebar">
-          {{#if user.google.spreadsheetId}}
-            <li><center><strong>Lift Reports</strong></center></li>
-          {{/if}}
+          <li><center><strong>Lift Reports</strong></center></li>
           {{#if user.google.data}}
             {{#each (getColumns user.google.data) }}
               <li><a href="/lift/{{encode this}}">{{this}}</a></li>
             {{/each}}
-          {{else if user.google.spreadsheetId}}
-            <li><a>None</a></li>
+          {{else if user.google}}
+            <li><a><font color="#ff6666">No Lifts Found</font></a></li>
+          {{else}}
+            <li><a>Demo Squat</a></li>
+            <li><a>Demo Deadlift</a></li>
+            <li><a>Demo Bench Press</a></li>
+            <li><a>Demo Hang Clean</a></li>
+            <li><a>Demo Bicep Curls</a></li>
           {{/if}}
         </ul>
       </div>
@@ -35,22 +43,22 @@
         <div class="row placeholders">
           <div class="col-xs-6 col-sm-3 placeholder">
             <div id="chart_div0" style="width: 900px; height: 300px" class="img-responsive"></div>
-            <h4 id="chart_div0_title">Lift 1</h4>
+            <h4 id="chart_div0_title">Demo Squat</h4>
             <span class="text-muted">Max</span>
           </div>
           <div class="col-xs-6 col-sm-3 placeholder">
             <div id="chart_div1" style="width: 900px; height: 300px" class="img-responsive"></div>
-            <h4 id="chart_div1_title">Lift 2</h4>
+            <h4 id="chart_div1_title">Demo Deadlift</h4>
             <span class="text-muted">Max</span>
           </div>
           <div class="col-xs-6 col-sm-3 placeholder">
             <div id="chart_div2" style="width: 900px; height: 300px" class="img-responsive"></div>
-            <h4 id="chart_div2_title">Lift 3</h4>
+            <h4 id="chart_div2_title">Demo Bench Press</h4>
             <span class="text-muted">Max</span>
           </div>
           <div class="col-xs-6 col-sm-3 placeholder">
             <div id="chart_div3" style="width: 900px; height: 300px" class="img-responsive"></div>
-            <h4 id="chart_div3_title">Lift 4</h4>
+            <h4 id="chart_div3_title">Demo Hang Clean</h4>
             <span class="text-muted">Max</span>
           </div>
         </div>
@@ -64,15 +72,15 @@
             <thead>
               <tr>
                 <th>Date</th>
-                <th>Squat</th>
+                <th>Demo Squat</th>
                 <th>1RM</th>
-                <th>Deadlift</th>
+                <th>Demo Deadlift</th>
                 <th>1RM</th>
-                <th>Bench Press</th>
+                <th>Demo Bench Press</th>
                 <th>1RM</th>
-                <th>Overhead Press</th>
+                <th>Demo Hang Clean</th>
                 <th>1RM</th>
-                <th>Curls</th>
+                <th>Demo Bicep Curls</th>
                 <th>1RM</th>
               </tr>
             </thead>
@@ -85,9 +93,9 @@
                 <td></td>
                 <td>Bench Press Numbers</td>
                 <td></td>
-                <td>Overhead Press Numbers</td>
+                <td>Hang Clean Numbers</td>
                 <td></td>
-                <td>Curls Numbers</td>
+                <td>Bicep Curls Numbers</td>
                 <td></td>
               </tr>
             </tbody>
