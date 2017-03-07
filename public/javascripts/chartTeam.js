@@ -88,7 +88,7 @@ function generateTeamData(teamFullData, lift) {
       masterLiftArray.push(fullData);
     }
   }
-  //console.log("masterLiftArray", masterLiftArray);
+  //console.log("masterLiftArray1", masterLiftArray);
 
   // Sort Data by Date
   masterLiftArray.sort(function(a,b){
@@ -97,27 +97,31 @@ function generateTeamData(teamFullData, lift) {
     return a[0] - b[0];
   });
 
-  //console.log("masterLiftArray", masterLiftArray);
+  //console.log("masterLiftArray2", masterLiftArray);
 
   // Now that it's ordered, repeat previous if undefined, and add each row to dt
   // Initialize the first data point
-  var prev = masterLiftArray[0];
-  for (var i = 1; i < prev.length; i++) {
-    if (!prev[i]) {
-      prev[i] = 0;
-    }
-  }
-  dt.addRow(prev);
-  for (var i = 1; i < masterLiftArray.length; i++) {
-    var data = masterLiftArray[i];
-    for (var j = 1; j < data.length; j++) {
-      if (!data[j]) {
-        data[j] = prev[j];
+  if (masterLiftArray.length) {
+      var prev = masterLiftArray[0];
+      for (var i = 1; i < prev.length; i++) {
+        if (!prev[i]) {
+          prev[i] = 0;
+        }
       }
-    }
-    dt.addRow(data);
-    masterLiftArray[i] = data;
-    prev = data;
+      dt.addRow(prev);
+      for (var i = 1; i < masterLiftArray.length; i++) {
+        var data = masterLiftArray[i];
+        for (var j = 1; j < data.length; j++) {
+          if (!data[j]) {
+            data[j] = prev[j];
+          }
+        }
+        dt.addRow(data);
+        masterLiftArray[i] = data;
+        prev = data;
+      }
+  } else {
+      console.log("[Warning] No data found for lift '"+ lift + "'");
   }
   //console.log("masterLiftArray", masterLiftArray);
 
