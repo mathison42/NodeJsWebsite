@@ -103,13 +103,24 @@ module.exports = function(app, passport) {
   }));
 
   // the callback after google has authenticated the user
-  app.get('/auth/google/callback',
-    passport.authenticate('google', {
-            successRedirect : '/profile',
-            failureRedirect : '/'
-    })
-  );
-
+  // Updated: Custom callback. Allows to pull data on login
+  // http://passportjs.org/docs/authenticate
+  app.get('/auth/google/callback', function(req, res, next) {
+    passport.authenticate('google', function(err, user, info) {
+      if (err) { return next(err); }
+      if (!user) { return res.redirect('/'); }
+      req.logIn(user, function(err) {
+          if (err) { return next(err); }
+          // If spreadsheet exists, search for new data on login
+          // else show the basic dashboard
+          if (user.google.spreadsheetId) {
+              return spreadsheet.getData(user, function(err, user) {res.redirect('/');});
+          } else {
+              return res.redirect('/');
+          }
+      });
+    })(req, res, next);
+  });
 };
 
 // route middleware to make sure a user is logged in
