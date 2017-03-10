@@ -1,1 +1,5 @@
 theme: jekyll-theme-minimal
+title: Workout Report
+description: Monitor personal and team lifting gains
+show_downloads: true
+google_analytics: UA-93454824-1
