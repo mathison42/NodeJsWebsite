@@ -1,6 +1,6 @@
-File describing how to set up auth.js and database.js
+### How-to: Google Authentication and MongoDB Database Configuration
 
-[Google - Auth.js](https://scotch.io/tutorials/easy-node-authentication-google)
+[Directions: Google Authentication](https://scotch.io/tutorials/easy-node-authentication-google)
 
 // auth.js
 module.exports = {
@@ -12,10 +12,10 @@ module.exports = {
     }
     // Different from scotch tutorial
     'memcache_url'  : 'MEMCACHE_URL', // Free 30 mb from redis.io
-    'secret'        : 'secret'
+    'secret'        : 'SECRET_HERE'
 };
 
-[MongoDB - database.js](https://scotch.io/tutorials/easy-node-authentication-setup-and-local)
+[Directions: MongoDB Configuration](https://scotch.io/tutorials/easy-node-authentication-setup-and-local)
 
 // database.js
 module.exports = {
