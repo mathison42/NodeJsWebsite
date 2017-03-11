@@ -1,0 +1,36 @@
+---
+layout: default
+---
+
+# To-Do
+- [x] Dashboard
+    - [x] Top 5 Workouts Numbers
+    - [x] Top 4 Lift Charts
+    - [x] Last X Number of Lifts
+- [x] Single Lifts
+    - [x] All Lift Numbers
+    - [x] Lift Graph
+    - [x] YouTube Links
+        - [x] Query: Lift Form
+        - [x] Query: Lift Specific Workout
+        - [x] In Parallel: Promise
+        - [ ] Randomize Video Queries
+- [ ] Team Lifts
+    - [x] Select Lift
+    - [x] View all Teammates Graph
+    - [ ] Chart of individual numbers
+- [x] Profile
+    - [x] Specify Number of Dashboard Records
+    - [x] Specify Sport
+    - [x] Specify Team Name
+    - [x] Template
+- [x] Finalize
+    - [x] Prevent weight input errors
+    - [x] Prevent date input errors
+    - [x] Remove all data points that don't have a date or have future date
+    - [x] Google hosting
+- [ ] Google Pages
+    - [x] Homepage
+    - [x] To-Do
+    - [x] Run Locally
+    - [ ] Directions
