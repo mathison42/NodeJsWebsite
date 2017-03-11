@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# To-Do
+### To-Do List
 - [x] Dashboard
     - [x] Top 5 Workouts Numbers
     - [x] Top 4 Lift Charts

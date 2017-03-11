@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Run Locally
+### Run Local Instance
 1. Install [Node.js](https://nodejs.org/en/)
 2. Install [MongoDB](https://www.mongodb.com/)
 3. Create a [Google Cloud](https://console.cloud.google.com) project

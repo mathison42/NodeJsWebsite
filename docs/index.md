@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Overview
+### Overview
 
 Monitor your workout and lifting progress through the Workout Report website. Connect to a Google Spreadsheet through Google login. Gain a larger understanding of your most popular lifts on the dashboard. Dive into each lift and find associated videos for form and additional workout plans (soon). Get your teammates to join and compare your overall progress.
 
