@@ -6,17 +6,17 @@ layout: default
 
 #### Quick Start
 1. View the [Workout Report template]({{ site.workout_template_url }}) in Google Sheets.
-![Workout Template Picture](images/workout-template.png)
+![Workout Template Picture](images/workout-template.PNG)
 2. Make a copy of the Workout Report template and save it in your Google Drive. If you do not already have a Google account, you will need to make one now.
 ![Make a Copy Picture](images/make-a-copy.png)
 3. Your new Workout spreadsheet should open in a new browser tab. This new spreadsheet will be where you update and save your lift data.
-![My Workout Report Picture](images/my-workout-report.png)
+![My Workout Report Picture](images/my-workout-report.PNG)
 4. Next, copy the URL or Spreadsheet ID from the top of the page.
-![Grab URL or Spreadsheet ID Picture](images/url-spreadsheet-id.png)
+![Grab URL or Spreadsheet ID Picture](images/url-spreadsheet-id.PNG)
 5. Paste it into the white text box at the top of the [Workout Report]({{ site.website_url }}) website. Note: If you are not logged in, it will redirect you to the login page.
-![Empty Dashboard Picture](images/empty-dashboard.png)
+![Empty Dashboard Picture](images/empty-dashboard.PNG)
 6. After entering your spreadsheet's URL or ID, the Workout Report dashboard will automatically be populated with your data! Data is refreshed on login or when the Spreadsheet ID textbox is triggered.
-![Demo Dashboard](images/demo-dashboard.png)
+![Demo Dashboard](images/demo-dashboard.PNG)
 
 #### Data Input and Validation
 The Workout Report is very particular on the format of your data. All invalid data will be grayed out and ignored on the dashboard or single lift's spreadsheet view. I have create a [Workout Report template]({{ site.workout_template_url }}) that shows a ton of examples on how data should be recorded. Follow the below rule set for specifics on how data is interpreted and parsed.
@@ -40,7 +40,8 @@ The Workout Report is very particular on the format of your data. All invalid da
             - Ex: `45x8` is interpreted as 45 pounds at 8 reps. The single set is implied.
         - Multiple sets use the following format: `[WEIGHT]x[REPETITIONS]*[SETS]`
             - Ex: `165x10*2` is interpreted as 165 pounds at 10 reps for 2 sets.
-        - When filling out multiple sets at differing reps or weight use the following format: `[WEIGHT]x[REPETITIONS]*[SETS]-[WEIGHT]x[REPETITIONS]*[SETS]-[WEIGHT]x[REPETITIONS]*[SETS]` This format could go on forever.
+        - When filling out multiple sets at differing reps or weight use the following format: `[WEIGHT]x[REPETITIONS]*[SETS]-[WEIGHT]x[REPETITIONS]*[SETS]-[WEIGHT]x[REPETITIONS]*[SETS]`
+            - This format could go on forever.
             - Ex: `165x10*2-175x8*2` is interpreted as 165 pounds at 10 reps for 2 sets and 175 pounds at reps 8 for 2 sets.
 - Data Parsing Explained:
     - Reps are initiated by a `x` character.
