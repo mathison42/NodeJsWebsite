@@ -11,7 +11,7 @@ layout: default
         - Google Drive (Read Only)
         - Google Sheets (Read Only)
         - YouTube (Read Only)
-4. Clone the [workout-report repository](https://github.com/mathison42/NodeJsWebsite)
+4. Clone the [workout-report repository]({{ site.github.repository_url }})
 5. Create `./config/auth.js` and `./config/database.js` files.
     - Follow examples in the `/config` directory's `README.md`.
 6. Start MongoDB from its `/bin` directory
