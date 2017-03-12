@@ -14,7 +14,7 @@
           {{#if user.google.spreadsheetId}}
             <li><a href="https://docs.google.com/spreadsheets/d/{{user.google.spreadsheetId}}/edit#gid=0">Google Sheet</a></li>
           {{else if user.google}}
-            <li><a><font color="#ff6666">No Spreadsheet Found</font></a></li>
+            <li><a href="https://mathison42.github.io/NodeJsWebsite/getting-started#quick-start" target="_blank"><font color="#ff6666">No Spreadsheet Found</font></a></li>
           {{/if}}
           {{#if user.profile.team}}
             <li><a href="/team">Team Statistics</a></li>
@@ -27,7 +27,7 @@
               <li><a href="/lift/{{encode this}}">{{this}}</a></li>
             {{/each}}
           {{else if user.google}}
-            <li><a><font color="#ff6666">No Lifts Found</font></a></li>
+            <li><a href="https://mathison42.github.io/NodeJsWebsite/getting-started#data-input-and-validation" target="_blank"><font color="#ff6666">No Lifts Found</font></a></li>
           {{else}}
             <li><a>Demo Squat</a></li>
             <li><a>Demo Deadlift</a></li>
