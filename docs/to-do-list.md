@@ -29,8 +29,8 @@ layout: default
     - [x] Prevent date input errors
     - [x] Remove all data points that don't have a date or have future date
     - [x] Google hosting
-- [ ] Google Pages
+- [x] Google Pages
     - [x] Homepage
     - [x] To-Do
     - [x] Run Locally
-    - [ ] Directions
+    - [x] Directions
