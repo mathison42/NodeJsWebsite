@@ -5,7 +5,6 @@ layout: default
 ### Getting Started
 
 #### Quick Start
-[Quick Start](#quick-start)
 1. View the [Workout Report template]({{ site.workout_template_url }}) in Google Sheets.
 ![Workout Template Picture](images/workout-template.PNG)
 2. Make a copy of the Workout Report template and save it in your Google Drive. If you do not already have a Google account, you will need to make one now.
@@ -20,7 +19,6 @@ layout: default
 ![Demo Dashboard](images/demo-dashboard.PNG)
 
 #### Data Input and Validation
-[Data Input and Validation](#data-input-and-validation)
 The Workout Report is very particular on the format of your data. All invalid data will be grayed out and ignored on the dashboard or single lift's spreadsheet view. I have create a [Workout Report template]({{ site.workout_template_url }}) that shows a ton of examples on how data should be recorded. Follow the below rule set for specifics on how data is interpreted and parsed.
 
 ##### Spreadsheet Header Rules
