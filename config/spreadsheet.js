@@ -19,7 +19,7 @@ module.exports =  {
             spreadsheetId: user.google.spreadsheetId,
             range: 'A:ZZZ',
           }, function(err, response) {
-              console.log(response);
+              //console.log(response);
             if (err || !response.range) {
                 if (err) {
                     console.log('getData: The SpreadSheet API returned an error: ' + err);

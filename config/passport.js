@@ -49,7 +49,7 @@ module.exports = function(passport) {
                   // Update login on each login
                   user.google.token = token;
                 } else {
-                    // if the user isnt in our database, create a new user
+                    // if the user isn't in our database, create a new user
                     user          = new User();
 
                     // set all of the relevant information
