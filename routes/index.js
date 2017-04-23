@@ -1,5 +1,7 @@
 
 var spreadsheet = require("../config/spreadsheet.js")
+var teamProfile = require("../config/teamProfile.js")
+// var teamWS      = require("../config/teamWorkoutSummary.js")
 var mongodb     = require("../config/mongodb.js")
 var profile     = require("../config/profile.js")
 var youtube     = require("../config/youtube.js")
@@ -48,6 +50,35 @@ module.exports = function(app, passport) {
        });
      });
   });
+
+
+  /* GET Create Team page */
+  app.get('/createTeamProfile', isLoggedIn, function(req, res) {
+    res.render('createTeamProfile', {
+      user : req.user, // get the user out of session and pass to template
+      strUser: JSON.stringify(req.user)
+    });
+  });
+
+  /* POST Create Team page */
+  app.post('/createTeamProfile', isLoggedIn, function(req, res, next) {
+    teamProfile.saveProfile(req.user.google.email, req.body, function(error, team) {
+      if (error) return next(error);
+      return res.render('profile', {
+        user : req.user, // return original user
+        team : team  // get the new team data
+      });
+    });
+  });
+
+  // /* GET Team Workouts page */
+  // app.get('/teamWorkouts', isLoggedIn, function(req, res) {
+  //     res.render('teamWorkouts', {
+  //        user : req.user,
+  //        strUser: JSON.stringify(req.user),
+  //       //  teamData : JSON.stringify(teamData)
+  //    });
+  // });
 
   /* GET Lift Page */
   app.get('/lift/:name', function(req, res, next) {
@@ -114,6 +145,9 @@ module.exports = function(app, passport) {
           // If spreadsheet exists, search for new data on login
           // else show the basic dashboard
           if (user.google.spreadsheetId) {
+            //   teamWS.getTeam(user, function(team) {
+            //       teamWS.getProgramData(user, team);
+            //   });
               return spreadsheet.getData(user, function(err, user) {res.redirect('/');});
           } else {
               return res.redirect('/');

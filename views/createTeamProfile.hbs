@@ -1,0 +1,47 @@
+<div class="col-sm-12">
+  <div class="well">
+    <form action="/createTeamProfile" method="post">
+        <legend class="text-danger">New Workout Report Team</legend>
+        <label>Team Name: </label>
+        <img src="images/question-icon.png" width="20" height="20" title="Enter your new team's name."/>
+        <br />
+        <input type="text" name="name" id="name" size="30" required="required"/>
+        <br /><br />
+        <label>Team Spreadsheet ID: </label>
+        <img src="images/question-icon.png" width="20" height="20" title="Specify Google Spreadsheet ID that contains the team's workouts."/>
+        <br />
+        <input type="text" name="spreadsheetId" id="spreadsheetId" size="30" />
+        <br /><br />
+        <label>Activity: </label>
+        <img src="images/question-icon.png" width="20" height="20" title="Assign a specific activity for your team."/>
+        <br />
+        <select name="activity" id="activity">
+          <option value="">None</option>
+          {{#each (listActivities) }}
+            <option value="{{this}}">{{this}}</option>
+          {{/each}}
+        </select>
+        <br /><br />
+        <label>Admin Emails: </label>
+        <input id='addAdmin' type='button' value='+' />
+        <img src="images/question-icon.png" width="20" height="20" title="Enter Admin emails to assign team modification permissions."/>
+        <br />
+        <input type="email" name="adminEmail0" id="adminEmail0" size="30" value="{{user.google.email}}" readonly/>
+        <div id='adminInput'></div>
+        <br /><br />
+        <label>Teammate Emails: </label>
+        <input id='addTeammate' type='button' value='+' />
+        <img src="images/question-icon.png" width="20" height="20" title="List the emails that should be a part of this team."/>
+        <br />
+        <input type="email" name="teammateEmail0" id="teammateEmail0" size="30" value="{{user.google.email}}" readonly/>
+        <div id='teammateInput'></div>
+        <br /><br />
+        <!-- <label>Private Team: </label>
+        <input type="checkbox" name="private" id="private" value="Private Team"/>
+        <img src="images/question-icon.png" width="20" height="20" title="Only show this team to users that have been added as team members."/>
+        <br /><br /> -->
+        <button type="submit" class="btn btn-warning btn-lg">Save Team</button>
+    </form>
+  </div>
+</div>
+<script type="text/javascript" src="javascripts/teamProfileHelper.js"></script>

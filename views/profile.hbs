@@ -1,6 +1,6 @@
 <div class="col-sm-12">
     <div class="well">
-        <h3 class="text-danger"><span class="fa fa-google-plus"></span> User Data</h3>
+        <h3 class="text-danger"><span class="fa fa-google-plus"></span> User Profile</h3>
             <p>
                 <strong>ID</strong>: {{ user.google.id }}<br>
                 <strong>Name</strong>: {{ user.google.name }}<br>
@@ -12,7 +12,7 @@
     </div>
 </div>
 {{#if user.google.id}}
-  <div class="col-sm-12">
+  <div class="col-sm-6">
       <div class="well">
         <h3 class="text-danger"><span class="fa fa-google-plus"></span> Extra Profile Data</h3>
         <form action="/profile" method="post">
@@ -52,11 +52,25 @@
               {{/each}}
             </select>
             <br>
-            <button type="submit" class="btn btn-warning btn-lg">Save Profile</button>
+            <button type="submit" class="btn btn-warning">Save Profile</button>
             {{#if updatedBool }}
                 <label class="text-danger">&nbsp;&nbsp;&nbsp;Updated!</label>
             {{/if}}
         </form>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="well">
+      <!-- #if team -->
+      {{#if team}}
+        <h3 class="text-danger"><span class="fa fa-google-plus">Team Profile</span></h3>
+      {{else}}
+        <h3 class="text-danger"><span class="fa fa-google-plus">No Team Found</span></h3>
+        <p>This area will be populated once you have been added to a team.</br></br>
+          If you want to be added to a team contact your Workout Report admins or create your own!
+        </p>
+        <a href="/createTeamProfile" class="btn btn-warning">Create Team</a>
+      {{/if}}
     </div>
   </div>
 {{/if}}

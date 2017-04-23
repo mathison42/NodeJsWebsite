@@ -8,7 +8,8 @@ var teamSchema = mongoose.Schema({
       activity        : String,
       name            : String,
       admins          : Array,
-      private         : Boolean           
+      teammates       : Array,
+      private         : Boolean
     },
     program           : {
         spreadsheetId : String,
@@ -17,5 +18,5 @@ var teamSchema = mongoose.Schema({
     }
 });
 
-// create the model for users and expose it to our app
+// create the model for teams and expose it to our app
 module.exports = mongoose.model('Team', teamSchema);

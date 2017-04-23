@@ -2,12 +2,17 @@
 var Team       = require('../models/team');
 
 module.exports =  {
-  saveProfile: function(userEmail, team, body, cbProfile) {
+  saveProfile: function(userEmail, body, cb) {
     // try to find the user based on their google id
 
-    Team.findOne({ 'profile.name' : team.profile.name }, function(err, team) {
+    Team.findOne({ 'profile.name' : body.name }, function(err, team) {
         if (err)
             return done(err);
+
+        console.log(team);
+        //console.log(team.profile.admins);
+        console.log(userEmail);
+
         if (!team || team.profile.admins.includes(userEmail)) {
             if (!team) {
                 // if the team isn't in our database, create a new team
@@ -16,27 +21,54 @@ module.exports =  {
             // set all of the relevant information
             // Assume it is all valid and vetted beforehand
             team.profile.name          = body.name;
-            team.profile.activity      = body.activity;
-            team.profile.admins        = body.admins;
-            team.profile.private       = body.private;
             team.program.spreadsheetId = body.spreadsheetId;
+            team.profile.activity      = body.activity;
+            team.profile.admins = []
+            team.profile.teammates = []
+            var adminCount = 0
+            var adminEmail = eval('body.adminEmail'+adminCount);
+            console.log(body.adminEmail0)
+            console.log(adminEmail)
+            console.log('body.adminEmail'+adminCount)
+            while(adminEmail != null) {
+                console.log('body.adminEmail'+adminCount)
+                if (adminEmail != "") {
+                    team.profile.admins.push(adminEmail);
+                }
+                adminCount++;
+                adminEmail = eval('body.adminEmail'+adminCount);
+            }
 
-            // save the user
+            var teammateCount = 0
+            var teammateEmail = eval('body.teammateEmail'+teammateCount)
+            console.log(body.teammateEmail0)
+            console.log(teammateEmail)
+            console.log('body.teammateEmail'+teammateCount)
+            while(teammateEmail != null) {
+                console.log('body.teammateEmail'+teammateCount)
+                if (teammateEmail != "") {
+                    team.profile.teammates.push(teammateEmail);
+                }
+                teammateCount++;
+                teammateEmail = eval('body.teammateEmail'+teammateCount);
+            }
+
+            // team.profile.admins        = [body.adminEmail1, body.adminEmail2,
+            //      body.adminEmail3, body.adminEmail4, body.adminEmail5];
+            // team.profile.private       = body.private;
+
+            // save the team
             team.save(function(err) {
                 if (err)
                     throw err;
             });
-            return cbProfile(null, team);
+            return cb(null, team);
 
         } else {
             // userEmail does not have access to modify this team
             console.log(userEmail + " does not have access to modify team.");
-            console.log("Redirecting to login screen...");
+            return cb(null, null);
         }
-     } else {
-         // if a team is not found, redirect to the login screen
-         console.log("Not logged in. Redirecting to profile screen...");
-     }
    });
   }
 };
