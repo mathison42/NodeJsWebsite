@@ -107,9 +107,6 @@ module.exports = function(app, passport) {
 
   /* POST Profile */
   app.post('/profile', isLoggedIn, function(req, res, next) {
-    //console.log("req.body", req.body);
-    // Variables are in req.body
-
     teamProfile.getTeamList(req.user, function(error, teamList){
         // Save them to database, then reload profile with values set as defaults
         profile.saveProfile(req.user, req.body, function(error, updatedUser) {
