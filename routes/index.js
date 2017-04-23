@@ -97,9 +97,12 @@ module.exports = function(app, passport) {
 
   /* GET Profile */
   app.get('/profile', function(req, res) {
-    res.render('profile', {
-      user : req.user // get the user out of session and pass to template
-    });
+      teamProfile.getTeamList(req.user, function(error, teamList){
+          return res.render('profile', {
+              user : req.user, // get the user out of session and pass to template
+              teamList : teamList
+          });
+      });
   });
 
   /* POST Profile */

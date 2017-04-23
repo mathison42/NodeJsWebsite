@@ -62,8 +62,16 @@
   <div class="col-sm-6">
     <div class="well">
       <!-- #if team -->
-      {{#if team}}
-        <h3 class="text-danger"><span class="fa fa-google-plus">Team Profile</span></h3>
+      {{#if teamList}}
+        <h3 class="text-danger"><span class="fa fa-google-plus">Team Profiles</span></h3>
+        {{#each teamList }}
+            <p><b>Team: </b>{{this.[0]}}
+            {{#if this.[1]}}
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="/createTeamProfile" class="btn btn-warning">Update {{this.[0]}} Team Profile</a>
+            {{/if}}
+            </p>
+        {{/each}}
       {{else}}
         <h3 class="text-danger"><span class="fa fa-google-plus">No Team Found</span></h3>
         <p>This area will be populated once you have been added to a team.</br></br>

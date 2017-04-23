@@ -70,5 +70,43 @@ module.exports =  {
             return cb(null, null);
         }
    });
-  }
+  },
+
+  /**
+   * param user User profile
+   * param cb Callback
+   * return Return list all teams the user is a part of and if an admin
+   */
+  getTeamList: function(user, cb) {
+      if (user) {
+          // try to find the user based on their google id
+          Team.find({ 'profile.teammates' : user.google.email }, function(err, teams) {
+              if (err)
+                return done(err);
+              if (teams) {
+                  var fullTeamResult = []
+                  for(var i = 0; i < teams.length; i++) {
+                      var team = teams[i];
+                      var singleTeamResult = []
+                      singleTeamResult.push(team.profile.name);
+                      // Can't access the isTeamAdmin function
+                      if (team.profile.admins.includes(user.google.email)) {
+                          singleTeamResult.push(true)
+                      } else {
+                          singleTeamResult.push(false)
+                      }
+                      fullTeamResult.push(singleTeamResult);
+                  };
+                  return cb(null, fullTeamResult);
+              } else {
+                  // if team is not found, record
+                  console.log("User is not a part of any teams...");
+                  return cb(null, null);
+              }
+          });
+      } else {
+          console.log("getTeamList: No user found...");
+          return cb(null, null);
+      }
+    },
 };
