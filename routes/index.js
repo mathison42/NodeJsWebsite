@@ -109,14 +109,18 @@ module.exports = function(app, passport) {
   app.post('/profile', isLoggedIn, function(req, res, next) {
     //console.log("req.body", req.body);
     // Variables are in req.body
-    // Save them to database, then reload profile with values set as defaults
-    profile.saveProfile(req.user, req.body, function(error, updatedUser) {
-      if (error) return next(error);
-      return res.render('profile', {
-        user : updatedUser, // get the new user data
-        updatedBool : true
+
+    teamProfile.getTeamList(req.user, function(error, teamList){
+        // Save them to database, then reload profile with values set as defaults
+        profile.saveProfile(req.user, req.body, function(error, updatedUser) {
+          if (error) return next(error);
+          return res.render('profile', {
+            user : updatedUser, // get the new user data
+            updatedBool : true, // get the new user data
+            teamList : teamList
+          });
+        });
       });
-    });
   });
 
   /* Logout */
