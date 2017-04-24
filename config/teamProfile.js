@@ -132,4 +132,78 @@ module.exports =  {
             return cb(null, fullPublicTeamResult);
         });
       },
+
+      /**
+       * param teamName The team's name
+       * param cb Callback
+       * return Run the callback with the team profile
+       */
+      getTeam: function(teamName, cb) {
+          // try to find the team based on the team's name
+          console.log(teamName)
+          Team.findOne({ 'profile.name' : teamName }, function(err, team) {
+              if (err)
+                return done(err);
+
+              if (team) {
+                  return cb(null, team);
+              } else {
+                  // if team is not found, record
+                  console.log("Team " + teamName + " does not exist...");
+                  return cb(null, null);
+              }
+          });
+      },
+
+      /**
+       * param user The teammate's user profile who wants to get a list of teammates
+       * param teamName The team's name
+       * param cb Callback
+       * return Run the callback with the teammate array
+       */
+      getTeammates: function(user, teamName, cb) {
+          // try to find the user based on their google id
+          this.getTeam(teamName, function(err, team) {
+              if (err)
+                return done(err);
+              if (team) {
+                  var teammates = team.profile.teammates;
+                  if (teammates.includes(user.google.email)) {
+                      return cb(teammates);
+                  } else {
+                      console.log(user.google.email + " is not a member of team " + teamName);
+                      return cb(null);
+                  }
+              } else {
+                  console.log("Could not find team " + teamName);
+                  return cb(null);
+              }
+          });
+      },
+
+      /**
+       * param user The admin's user profile who wants to get a list of teammates
+       * param teamName The team's name
+       * param cb Callback
+       * return Run the callback with the admin array
+       */
+      getAdmins: function(user, teamName, cb) {
+          // try to find the user based on their google id
+          this.getTeam(teamName, function(err, team) {
+              if (err)
+                return done(err);
+              if (team) {
+                  var admins = team.profile.admins;
+                  if (admins.includes(user.google.email)) {
+                      return cb(admins);
+                  } else {
+                      console.log(user.google.email + " is not an admin of team " + teamName);
+                      return cb(null);
+                  }
+              } else {
+                  console.log("Could not find team " + teamName);
+                  return cb(null);
+              }
+          });
+      }
 };

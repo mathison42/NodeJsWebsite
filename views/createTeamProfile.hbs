@@ -35,6 +35,12 @@
         <img src="images/question-icon.png" width="20" height="20" title="Enter Admin emails to assign team modification permissions."/>
         <br />
         <input type="email" name="adminEmail0" id="adminEmail0" size="30" value="{{user.google.email}}" readonly/>
+        {{#each admins }}
+            {{#if (ifCond this '!=' ../user.google.email) }}
+                <br />
+                <input type="email" name="adminEmail{{@index}}" id="adminEmail{{@index}}" size="30" value="{{this}}" />
+            {{/if}}
+        {{/each}}
         <div id='adminInput'></div>
         <br /><br />
         <label>Teammate Emails: </label>
@@ -42,14 +48,22 @@
         <img src="images/question-icon.png" width="20" height="20" title="List the emails that should be a part of this team."/>
         <br />
         <input type="email" name="teammateEmail0" id="teammateEmail0" size="30" value="{{user.google.email}}" readonly/>
+        {{#each teammates }}
+            {{#if (ifCond this '!=' ../user.google.email) }}
+                <br />
+                <input type="email" name="teammateEmail{{@index}}" id="teammateEmail{{@index}}" size="30" value="{{this}}" />
+            {{/if}}
+        {{/each}}
         <div id='teammateInput'></div>
         <br /><br />
-        <!-- <label>Private Team: </label>
+        <label>Private Team: </label>
         <input type="checkbox" name="private" id="private" value="Private Team"/>
-        <img src="images/question-icon.png" width="20" height="20" title="Only show this team to users that have been added as team members."/>
-        <br /><br /> -->
+        <img src="images/question-icon.png" width="20" height="20" title="Only show this team to users that have been added as a team member."/>
+        <br /><br />
         <button type="submit" class="btn btn-warning btn-lg">Save Team</button>
     </form>
   </div>
 </div>
 <script type="text/javascript" src="javascripts/teamProfileHelper.js"></script>
+<script type="text/javascript">updateAdminCount({{admins.length}})</script>
+<script type="text/javascript">updateTeammateCount({{teammates.length}})</script>

@@ -54,11 +54,31 @@ module.exports = function(app, passport) {
 
   /* GET Create Team page */
   app.get('/createTeamProfile', isLoggedIn, function(req, res) {
-    res.render('createTeamProfile', {
-      user : req.user, // get the user out of session and pass to template
-      strUser: JSON.stringify(req.user),
-      teamName: req.query.name
-    });
+      // Promise for Admin List
+      var promiseGetAdminList = new Promise(function(resolve, reject) {
+        teamProfile.getAdmins(req.user, req.query.name, resolve);
+      });
+
+      // Promise for Teammate List
+      var promiseGetTeammates = new Promise(function(resolve, reject) {
+        teamProfile.getTeammates(req.user, req.query.name, resolve);
+      });
+
+      // Once all promises are received, continue
+      Promise.all([
+          promiseGetAdminList, promiseGetTeammates
+      ]).then(function(lists) {
+          return res.render('createTeamProfile', {
+              user : req.user, // get the user out of session and pass to template
+              strUser: JSON.stringify(req.user),
+              teamName: req.query.name,
+              admins: lists[0],
+              teammates: lists[1]
+          });
+      }, function (err) {
+          console.log(err);
+          return res.redirect('/');
+      });
   });
 
   /* POST Create Team page */
@@ -162,7 +182,7 @@ module.exports = function(app, passport) {
           // If spreadsheet exists, search for new data on login
           // else show the basic dashboard
           if (user.google.spreadsheetId) {
-            //   teamWS.getTeam(user, function(team) {
+            //   teamProfile.getTeam(user, function(team) {
             //       teamWS.getProgramData(user, team);
             //   });
               return spreadsheet.getData(user, function(err, user) {res.redirect('/');});
