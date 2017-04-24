@@ -27,6 +27,7 @@
                 {{/if}}
               {{/each}}
             </select>
+            <img src="images/question-icon.png" width="20" height="20" title="Specify which activity your lift videos will query against."/>
             <br>
             <label>Team: </label>
             <select name="team" id="team">
@@ -39,6 +40,7 @@
                 {{/if}}
               {{/each}}
             </select>
+            <img src="images/question-icon.png" width="20" height="20" title="Select which team to view throughout Workout Report."/>
             <br>
             <label>Max Dashboard Days: </label>
             <select name="maxDashDays" id="maxDashDays" selected="{{user.profile.maxDashDays}}">
@@ -51,6 +53,7 @@
                 {{/if}}
               {{/each}}
             </select>
+            <img src="images/question-icon.png" width="20" height="20" title="Displays the max number of days on the front dashboard."/>
             <br>
             <button type="submit" class="btn btn-warning">Save Profile</button>
             {{#if updatedBool }}
@@ -67,10 +70,10 @@
         {{#each teamList }}
             <p><b>Team: </b>{{this.[0]}}
             {{#if this.[1]}}
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="/createTeamProfile?name={{this.[0]}}" class="btn btn-warning">Update Team Profile</a>
+                <a href="/createTeamProfile?name={{this.[0]}}" style="float: right" class="btn btn-warning">Update {{this.[0]}} Profile</a>
             {{/if}}
             </p>
+            <br />
         {{/each}}
         <br />
       {{else}}
