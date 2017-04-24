@@ -109,4 +109,27 @@ module.exports =  {
           return cb(null, null);
       }
     },
+
+    /**
+     * param cb Callback
+     * return Return list of all public teams
+     */
+    getPublicTeamList: function(cb) {
+        // Find all teams that are not private
+        Team.find({ 'profile.private' : false }, function(err, teams) {
+            if (err)
+              return done(err);
+            var fullPublicTeamResult = []
+            if (teams) {
+                for(var i = 0; i < teams.length; i++) {
+                    var team = teams[i]
+                    fullPublicTeamResult.push(team.profile.name);
+                };
+            } else {
+                // if team is not found, record
+                console.log("Could not find any public teams...");
+            }
+            return cb(null, fullPublicTeamResult);
+        });
+      },
 };

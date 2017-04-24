@@ -56,19 +56,26 @@ module.exports = function(app, passport) {
   app.get('/createTeamProfile', isLoggedIn, function(req, res) {
     res.render('createTeamProfile', {
       user : req.user, // get the user out of session and pass to template
-      strUser: JSON.stringify(req.user)
+      strUser: JSON.stringify(req.user),
+      teamName: req.query.name
     });
   });
 
   /* POST Create Team page */
   app.post('/createTeamProfile', isLoggedIn, function(req, res, next) {
-    teamProfile.saveProfile(req.user.google.email, req.body, function(error, team) {
-      if (error) return next(error);
-      return res.render('profile', {
-        user : req.user, // return original user
-        team : team  // get the new team data
+      teamProfile.saveProfile(req.user.google.email, req.body, function(error, team) {
+          teamProfile.getPublicTeamList(function(error, publicTeamList) {
+              teamProfile.getTeamList(req.user, function(error, teamList){
+                  if (error) return next(error);
+                  return res.render('profile', {
+                      user : req.user, // return original user
+                      team : team,  // get the new team data
+                      teamList : teamList,
+                      fullTeamList : publicTeamList.concat(teamList).sort()
+                  });
+              });
+          });
       });
-    });
   });
 
   // /* GET Team Workouts page */
@@ -97,26 +104,32 @@ module.exports = function(app, passport) {
 
   /* GET Profile */
   app.get('/profile', function(req, res) {
-      teamProfile.getTeamList(req.user, function(error, teamList){
-          return res.render('profile', {
-              user : req.user, // get the user out of session and pass to template
-              teamList : teamList
+      teamProfile.getPublicTeamList(function(error, publicTeamList) {
+          teamProfile.getTeamList(req.user, function(error, teamList){
+              return res.render('profile', {
+                  user : req.user, // get the user out of session and pass to template
+                  teamList : teamList,
+                  fullTeamList : publicTeamList.concat(teamList).sort()
+              });
           });
       });
   });
 
   /* POST Profile */
   app.post('/profile', isLoggedIn, function(req, res, next) {
-    teamProfile.getTeamList(req.user, function(error, teamList){
-        // Save them to database, then reload profile with values set as defaults
-        profile.saveProfile(req.user, req.body, function(error, updatedUser) {
-          if (error) return next(error);
-          return res.render('profile', {
-            user : updatedUser, // get the new user data
-            updatedBool : true, // get the new user data
-            teamList : teamList
+      teamProfile.getPublicTeamList(function(error, publicTeamList) {
+          teamProfile.getTeamList(req.user, function(error, teamList){
+              // Save them to database, then reload profile with values set as defaults
+              profile.saveProfile(req.user, req.body, function(error, updatedUser) {
+                  if (error) return next(error);
+                  return res.render('profile', {
+                    user : updatedUser, // get the new user data
+                    updatedBool : true, // get the new user data
+                    teamList : teamList,
+                    fullTeamList : publicTeamList.concat(teamList).sort()
+                  });
+              });
           });
-        });
       });
   });
 

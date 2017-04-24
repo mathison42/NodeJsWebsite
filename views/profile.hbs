@@ -31,11 +31,11 @@
             <label>Team: </label>
             <select name="team" id="team">
               <option value="">None</option>
-              {{#each (listTeams) }}
-                {{#if (ifCond this '==' ../user.profile.team) }}
-                  <option value="{{this}}" selected="selected">{{this}}</option>
+              {{#each fullTeamList }}
+                {{#if (ifCond this.[0] '==' ../user.profile.team) }}
+                  <option value="{{this.[0]}}" selected="selected">{{this.[0]}}</option>
                 {{else}}
-                  <option value="{{this}}">{{this}}</option>
+                  <option value="{{this.[0]}}">{{this.[0]}}</option>
                 {{/if}}
               {{/each}}
             </select>
@@ -68,17 +68,18 @@
             <p><b>Team: </b>{{this.[0]}}
             {{#if this.[1]}}
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="/createTeamProfile" class="btn btn-warning">Update {{this.[0]}} Team Profile</a>
+                <a href="/createTeamProfile?name={{this.[0]}}" class="btn btn-warning">Update Team Profile</a>
             {{/if}}
             </p>
         {{/each}}
+        <br />
       {{else}}
         <h3 class="text-danger"><span class="fa fa-google-plus">No Team Found</span></h3>
         <p>This area will be populated once you have been added to a team.</br></br>
           If you want to be added to a team contact your Workout Report admins or create your own!
         </p>
-        <a href="/createTeamProfile" class="btn btn-warning">Create Team</a>
       {{/if}}
+      <a href="/createTeamProfile" class="btn btn-warning">Create New Team</a>
     </div>
   </div>
 {{/if}}

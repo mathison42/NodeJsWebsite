@@ -1,11 +1,19 @@
 <div class="col-sm-12">
   <div class="well">
     <form action="/createTeamProfile" method="post">
-        <legend class="text-danger">New Workout Report Team</legend>
+        {{#if teamName}}
+            <legend class="text-danger">Update Workout Report Team</legend>
+        {{else}}
+            <legend class="text-danger">New Workout Report Team</legend>
+        {{/if}}
         <label>Team Name: </label>
-        <img src="images/question-icon.png" width="20" height="20" title="Enter your new team's name."/>
+        <img src="images/question-icon.png" width="20" height="20" title="Enter your new team's name." />
         <br />
-        <input type="text" name="name" id="name" size="30" required="required"/>
+        {{#if teamName}}
+            <input type="text" name="name" id="name" size="30" required="required"  value="{{teamName}}" readonly/>
+        {{else}}
+            <input type="text" name="name" id="name" size="30" required="required" />
+        {{/if}}
         <br /><br />
         <label>Team Spreadsheet ID: </label>
         <img src="images/question-icon.png" width="20" height="20" title="Specify Google Spreadsheet ID that contains the team's workouts."/>
