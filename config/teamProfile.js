@@ -97,13 +97,13 @@ module.exports =  {
                   return cb(null, fullTeamResult);
               } else {
                   // if team is not found, record
-                  console.log("User is not a part of any teams...");
-                  return cb(null, null);
+                  console.log("getTeamList: User is not a part of any teams...");
+                  return cb(null, []);
               }
           });
       } else {
           console.log("getTeamList: No user found...");
-          return cb(null, null);
+          return cb(null, []);
       }
     },
 
@@ -124,7 +124,7 @@ module.exports =  {
                 };
             } else {
                 // if team is not found, record
-                console.log("Could not find any public teams...");
+                console.log("getPublicTeamList: Could not find any public teams...");
             }
             return cb(null, fullPublicTeamResult);
         });
@@ -147,8 +147,8 @@ module.exports =  {
                       return cb(null, team);
                   } else {
                       // if team is not found, record
-                      console.log("Team " + teamName + " does not exist...");
-                      return cb(null, null);
+                      console.log("getTeam: Team " + teamName + " does not exist...");
+                      return cb(null, new Team());
                   }
               });
           } else {
@@ -172,12 +172,12 @@ module.exports =  {
                   if (teammates.includes(user.google.email)) {
                       return cb(teammates);
                   } else {
-                      console.log(user.google.email + " is not a member of team " + teamName);
-                      return cb(null);
+                      console.log("getTeammates: " + user.google.email + " is not a member of team " + teamName);
+                      return cb([]);
                   }
               } else {
-                  console.log("Could not find team " + teamName);
-                  return cb(null);
+                  console.log("getTeammates: Could not find team " + teamName);
+                  return cb([]);
               }
           });
       },
@@ -198,12 +198,12 @@ module.exports =  {
                   if (admins.includes(user.google.email)) {
                       return cb(admins);
                   } else {
-                      console.log(user.google.email + " is not an admin of team " + teamName);
-                      return cb(null);
+                      console.log("getAdmins: " + user.google.email + " is not an admin of team " + teamName);
+                      return cb([]);
                   }
               } else {
-                  console.log("Could not find team " + teamName);
-                  return cb(null);
+                  console.log("getAdmins: Could not find team " + teamName);
+                  return cb([]);
               }
           });
       }

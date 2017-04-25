@@ -57,17 +57,14 @@ module.exports = function(app, passport) {
 
       teamProfile.getTeam(req.query.teamName, function(error, team){
           if (error) return next(error);
-          console.log("spreadsheetId" + team.program.spreadsheetId)
-          console.log("private" + team.profile.private)
-          console.log("activity" + team.profile.activity)
           return res.render('createTeamProfile', {
               user : req.user, // get the user out of session and pass to template
               strUser: JSON.stringify(req.user),
               teamName: team.profile.name,
               spreadsheetId: team.program.spreadsheetId,
               activity: team.profile.activity,
-              admins: team.profile.admins || [],
-              teammates: team.profile.teammates || [],
+              admins: team.profile.admins,
+              teammates: team.profile.teammates,
               private: team.profile.private
           });
       });
@@ -82,7 +79,7 @@ module.exports = function(app, passport) {
                   return res.render('profile', {
                       user : req.user, // return original user
                       team : team,  // get the new team data
-                      teamList : teamList,
+                      teamList : teamList.sort(),
                       fullTeamList : publicTeamList.concat(teamList).sort()
                   });
               });
@@ -120,7 +117,7 @@ module.exports = function(app, passport) {
           teamProfile.getTeamList(req.user, function(error, teamList){
               return res.render('profile', {
                   user : req.user, // get the user out of session and pass to template
-                  teamList : teamList,
+                  teamList : teamList.sort(),
                   fullTeamList : publicTeamList.concat(teamList).sort()
               });
           });
@@ -137,7 +134,7 @@ module.exports = function(app, passport) {
                   return res.render('profile', {
                     user : updatedUser, // get the new user data
                     updatedBool : true, // get the new user data
-                    teamList : teamList,
+                    teamList : teamList.sort(),
                     fullTeamList : publicTeamList.concat(teamList).sort()
                   });
               });
