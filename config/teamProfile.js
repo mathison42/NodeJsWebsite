@@ -23,8 +23,9 @@ module.exports =  {
             team.profile.name          = body.name;
             team.program.spreadsheetId = body.spreadsheetId;
             team.profile.activity      = body.activity;
-            team.profile.admins = []
-            team.profile.teammates = []
+            team.profile.admins        = []
+            team.profile.teammates     = []
+            team.profile.private       = body.private;
             var adminCount = 0
             var adminEmail = eval('body.adminEmail'+adminCount);
             console.log(body.adminEmail0)
@@ -52,10 +53,6 @@ module.exports =  {
                 teammateCount++;
                 teammateEmail = eval('body.teammateEmail'+teammateCount);
             }
-
-            // team.profile.admins        = [body.adminEmail1, body.adminEmail2,
-            //      body.adminEmail3, body.adminEmail4, body.adminEmail5];
-            // team.profile.private       = body.private;
 
             // save the team
             team.save(function(err) {
@@ -141,18 +138,22 @@ module.exports =  {
       getTeam: function(teamName, cb) {
           // try to find the team based on the team's name
           console.log(teamName)
-          Team.findOne({ 'profile.name' : teamName }, function(err, team) {
-              if (err)
-                return done(err);
+          if (teamName) {
+              Team.findOne({ 'profile.name' : teamName }, function(err, team) {
+                  if (err)
+                    return done(err);
 
-              if (team) {
-                  return cb(null, team);
-              } else {
-                  // if team is not found, record
-                  console.log("Team " + teamName + " does not exist...");
-                  return cb(null, null);
-              }
-          });
+                  if (team) {
+                      return cb(null, team);
+                  } else {
+                      // if team is not found, record
+                      console.log("Team " + teamName + " does not exist...");
+                      return cb(null, null);
+                  }
+              });
+          } else {
+              return cb(null, new Team());
+          }
       },
 
       /**

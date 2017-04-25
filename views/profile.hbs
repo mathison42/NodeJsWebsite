@@ -70,7 +70,7 @@
         {{#each teamList }}
             <p><b>Team: </b>{{this.[0]}}
             {{#if this.[1]}}
-                <a href="/createTeamProfile?name={{this.[0]}}" style="float: right" class="btn btn-warning">Update {{this.[0]}} Profile</a>
+                <a href="/createTeamProfile?teamName={{this.[0]}}" style="float: right" class="btn btn-warning">Update {{this.[0]}} Profile</a>
             {{/if}}
             </p>
             <br />

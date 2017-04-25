@@ -54,30 +54,22 @@ module.exports = function(app, passport) {
 
   /* GET Create Team page */
   app.get('/createTeamProfile', isLoggedIn, function(req, res) {
-      // Promise for Admin List
-      var promiseGetAdminList = new Promise(function(resolve, reject) {
-        teamProfile.getAdmins(req.user, req.query.name, resolve);
-      });
 
-      // Promise for Teammate List
-      var promiseGetTeammates = new Promise(function(resolve, reject) {
-        teamProfile.getTeammates(req.user, req.query.name, resolve);
-      });
-
-      // Once all promises are received, continue
-      Promise.all([
-          promiseGetAdminList, promiseGetTeammates
-      ]).then(function(lists) {
+      teamProfile.getTeam(req.query.teamName, function(error, team){
+          if (error) return next(error);
+          console.log("spreadsheetId" + team.program.spreadsheetId)
+          console.log("private" + team.profile.private)
+          console.log("activity" + team.profile.activity)
           return res.render('createTeamProfile', {
               user : req.user, // get the user out of session and pass to template
               strUser: JSON.stringify(req.user),
-              teamName: req.query.name,
-              admins: lists[0],
-              teammates: lists[1]
+              teamName: team.profile.name,
+              spreadsheetId: team.program.spreadsheetId,
+              activity: team.profile.activity,
+              admins: team.profile.admins || [],
+              teammates: team.profile.teammates || [],
+              private: team.profile.private
           });
-      }, function (err) {
-          console.log(err);
-          return res.redirect('/');
       });
   });
 

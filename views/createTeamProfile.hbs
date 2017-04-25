@@ -18,7 +18,7 @@
         <label>Team Spreadsheet ID: </label>
         <img src="images/question-icon.png" width="20" height="20" title="Specify Google Spreadsheet ID that contains the team's workouts."/>
         <br />
-        <input type="text" name="spreadsheetId" id="spreadsheetId" size="30" />
+        <input type="text" name="spreadsheetId" id="spreadsheetId" size="30" value="{{spreadsheetId}}"/>
         <br /><br />
         <label>Activity: </label>
         <img src="images/question-icon.png" width="20" height="20" title="Assign a specific activity for your team."/>
@@ -26,7 +26,11 @@
         <select name="activity" id="activity">
           <option value="">None</option>
           {{#each (listActivities) }}
-            <option value="{{this}}">{{this}}</option>
+            {{#if (ifCond this '==' ../activity) }}
+              <option value="{{this}}" selected="selected">{{this}}</option>
+            {{else}}
+              <option value="{{this}}">{{this}}</option>
+            {{/if}}
           {{/each}}
         </select>
         <br /><br />
@@ -57,7 +61,11 @@
         <div id='teammateInput'></div>
         <br /><br />
         <label>Private Team: </label>
-        <input type="checkbox" name="private" id="private" value="Private Team"/>
+        {{#if private }}
+            <input type="checkbox" name="private" id="private" value="Private Team" checked/>
+        {{else}}
+            <input type="checkbox" name="private" id="private" value="Private Team"/>
+        {{/if}}
         <img src="images/question-icon.png" width="20" height="20" title="Only show this team to users that have been added as a team member."/>
         <br /><br />
         <button type="submit" class="btn btn-warning btn-lg">Save Team</button>
