@@ -23,4 +23,4 @@ Monitor your workout and lifting progress through the Workout Report website. Co
 9. View your local instance of [Workout Report](localhost:3000) at localhost:3000
 
 ### Additional Documentation
-    [GitHub Pages](https://mathison42.github.io/NodeJsWebsite/)
+[GitHub Pages](https://mathison42.github.io/NodeJsWebsite/)
