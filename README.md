@@ -22,5 +22,10 @@ Monitor your workout and lifting progress through the Workout Report website. Co
     - `set DEBUG=NodeJsWebsite:* & npm start` **or** `./start_server.sh`
 9. View your local instance of [Workout Report](localhost:3000) at localhost:3000
 
+### Docker Instructions
+- Create `./config/auth.js` and `./config/database.js` files.
+- Build: docker build -t workout-report .
+- Run: docker run -p 3000:3000 workout-report
+
 ### Additional Documentation
 [GitHub Pages](https://mathison42.github.io/NodeJsWebsite/)
