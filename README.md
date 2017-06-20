@@ -24,8 +24,8 @@ Monitor your workout and lifting progress through the Workout Report website. Co
 
 ### Docker Instructions
 - Create `./config/auth.js` and `./config/database.js` files.
-- Build: docker build -t workout-report .
-- Run: docker run -p 3000:3000 workout-report
+- Build: `docker build -t workout-report .``
+- Run: `docker run -p 3000:3000 workout-report`
 
 ### Additional Documentation
 [GitHub Pages](https://mathison42.github.io/NodeJsWebsite/)
