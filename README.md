@@ -23,7 +23,11 @@ Monitor your workout and lifting progress through the Workout Report website. Co
 9. View your local instance of [Workout Report](localhost:3000) at localhost:3000
 
 ### Docker Instructions
-- Create `./config/auth.js` and `./config/database.js` files.
+- Create:
+    - MonogoDB
+    - Google Cloud APIs
+    - `./config/auth.js` file
+    - `./config/database.js` file
 - Build: `docker build -t workout-report .`
 - Run: `docker run -p 3000:3000 workout-report`
 
